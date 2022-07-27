@@ -1,21 +1,35 @@
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import Multiplication_table from './components/muliplication-table/muliplication-table';
+import Word_relay from './components/word-relay';
 import './App.css';
 
-function App() {
-  const styleObj = {
-    color: 'yellow',
-    backgroundColor: 'black',
-  };
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: #e9ecef;
+  }
 
+  .App {
+    width: 300px;
+    height: 500px;
+    margin: 0 auto;
+    margin-top : 100px;
+
+    border : 1px solid black;
+    border-radius : 20px;
+    background-color : white;
+  }
+`;
+
+function App() {
   return (
-    <div className='App'>
-      <div style={styleObj} className='multiplication-container'>
-        <p>6 곱하기 3은?</p>
-        <input type='number'></input>
-        <button style={styleObj} type='submit'>
-          확인
-        </button>
+    <>
+      <GlobalStyle />
+      <div className='App'>
+        <Multiplication_table />
+        <Word_relay />
       </div>
-    </div>
+    </>
   );
 }
 
