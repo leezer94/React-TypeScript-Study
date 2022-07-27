@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const styleObj = {
+    color: 'yellow',
+    backgroundColor: 'black',
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div style={styleObj} className='multiplication-container'>
+        <p>6 곱하기 3은?</p>
+        <input type='number'></input>
+        <button style={styleObj} type='submit'>
+          확인
+        </button>
+      </div>
     </div>
   );
 }
