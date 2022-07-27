@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# 1주차 과제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<aside>
+💛 1주차 과제는 **구구단, 끝말잇기** 입니다.
+모임 하루 전날까지 React 버전을 깃허브에 업로드 후 체크 리스트에 표시해주세요.
 
-## Available Scripts
+시간이 남은 경우 TS를 미리 작업하셔도 좋습니다!
+TS 제출은 모임 주 일요일까지 입니다.
 
-In the project directory, you can run:
+</aside>
 
-### `npm start`
+## 1. 구구단
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🚩 필수 조건
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  - 랜덤으로 문제가 출력 됩니다.
+  - 답을 입력할 경우 결과를 알려주고, 새 문제를 출력합니다.
 
-### `npm test`
+- 🌟 추가 조건
+  - 2부터 9까지 단을 선택할 수 있게 합니다.
+    - ex. 2단 선택 시 2 곱하기 \*는? 으로 문제를 출력
+  - 숫자 외 다른 것이 입력되면 결과창에 ‘숫자만 입력하세요’를 출력 합니다.
+  - 그 외 구현하고 싶은 기능을 구현 해주세요.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 2. 끝말잇기
 
-### `npm run build`
+- 🚩 필수 조건
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - 고정된 제시어로 시작합니다.
+  - 다음 단어를 입력하고 버튼을 눌렀을 때,
+    - 올바른 단어를 입력한 경우, 해당 단어를 제시어로 출력 합니다.
+    - 올바르지 않은 단어를 입력한 경우, 제시어는 유지되고 입력칸 하단에 ‘틀렸습니다’를 출력합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 🌟 추가 조건
+  - 입력창이 비어있으면 입력칸 하단에 ‘글자를 입력하세요’를 출력합니다.
+  - 그 외 구현하고 싶은 기능을 구현해주세요.
