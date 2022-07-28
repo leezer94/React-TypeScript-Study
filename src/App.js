@@ -1,7 +1,7 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import Multiplication_table from './components/muliplication-table/muliplication-table';
-import Word_relay from './components/word-relay';
+import Word_relay from './components/word-relay/word-relay';
 import './App.css';
 
 const GlobalStyle = createGlobalStyle`
