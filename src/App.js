@@ -3,6 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 import Multiplication_table from './components/muliplication-table/muliplication-table';
 import Word_relay from './components/word-relay/word-relay';
 import './App.css';
+import ComputherVsButton from './components/word-relay/computerVsButton';
+import ComputerWordRelay from './components/word-relay/computer-word-relay';
+import { fetch우리말api } from './common/api';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,16 +24,32 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <div className='App'>
-        <Multiplication_table />
-        <Word_relay />
-      </div>
-    </>
-  );
+class App extends React.Component {
+  state = {
+    currentGame: 'vsComputer',
+  };
+
+  handleComputerGameButton = () => {
+    const { currentGame } = this.state;
+
+    this.setState({
+      ...this.state,
+      currentGame: currentGame === 'vsComputer' ? 'onYourOwn' : 'vsComputer',
+    });
+  };
+
+  render() {
+    return (
+      <>
+        <GlobalStyle />
+        <div className='App'>
+          <Multiplication_table />
+          <ComputherVsButton key={0} value={this.state.currentGame} onClickComputerGameButton={this.handleComputerGameButton} />
+          {this.state.currentGame === 'onYourOwn' ? <ComputerWordRelay /> : <Word_relay />}
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;

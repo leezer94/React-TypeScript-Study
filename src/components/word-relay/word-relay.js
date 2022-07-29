@@ -1,10 +1,12 @@
 import React from 'react';
+import { fetch우리말api } from '../../common/api.js';
 import { 한글_정규표현식 } from '../../common/regex.js';
 
 class Word_relay extends React.Component {
   state = {
     prevWord: '',
     currentWord: '곰자리',
+    definition: '',
   };
 
   handleErrorMessage(word, currentWord) {
@@ -33,25 +35,28 @@ class Word_relay extends React.Component {
     return isValid;
   }
 
-  handleSubmitButton(word) {
-    let { prevWord, currentWord } = this.state;
+  async handleSubmitButton(word) {
+    let { prevWord, currentWord, definition } = this.state;
 
     prevWord = currentWord;
-
+    definition = await fetch우리말api(word);
     currentWord = word;
+
+    console.log(definition);
 
     this.setState({
       ...this.state,
       prevWord,
       currentWord,
+      definition,
     });
   }
+
   render() {
-    const { currentWord } = this.state;
+    const { currentWord, definition } = this.state;
 
     return (
       <div className='word_relay-container'>
-        <p>규칙 : 한글, 세글자</p>
         <p className='curernt-word'>{currentWord}</p>
         <input ref={(ref) => (this.wordInput = ref)} type='text'></input>
         <button
@@ -68,6 +73,7 @@ class Word_relay extends React.Component {
         >
           입력
         </button>
+        <p className='word_definition'>{definition ? definition : '결과가 없습니다'}</p>
         <p style={{ color: 'red' }} ref={(ref) => (this.errorMessage = ref)}></p>
       </div>
     );
