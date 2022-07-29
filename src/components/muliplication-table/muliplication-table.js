@@ -1,4 +1,5 @@
 import React from 'react';
+import { CLASSNAME, COLOR } from '../../common/constants/constants.js';
 import { inputValidation, removeClassList, addClassList, generateRandomNumber, getRightEqualSignLetter, clearInputValue } from '../../utils/utils.js';
 import DigitButton from './DigitButton.js';
 
@@ -6,44 +7,43 @@ class Multiplication_table extends React.Component {
   state = {
     firstNumber: 9,
     secondNumber: 2,
-    sum: 9 * 2,
+    multiple: 9 * 2,
     evalutaion: true,
   };
 
   updateStateNumbers() {
-    let { firstNumber, secondNumber, sum, evalutaion } = this.state;
+    let { firstNumber, secondNumber, multiple } = this.state;
 
     firstNumber = generateRandomNumber(9);
     secondNumber = generateRandomNumber(9);
-    sum = firstNumber * secondNumber;
-    evalutaion = true;
+    multiple = firstNumber * secondNumber;
 
     this.setState({
       ...this.state,
       firstNumber,
       secondNumber,
-      sum,
-      evalutaion,
+      multiple,
+      evalutaion: true,
     });
   }
 
   handleNotANumberMessage(input, target) {
     const isNumberTypeInputValue = isNaN(input.value);
 
-    return isNumberTypeInputValue ? removeClassList(target, 'hide') : addClassList(target, 'hide');
+    return isNumberTypeInputValue ? removeClassList(target, CLASSNAME.HIDE) : addClassList(target, CLASSNAME.HIDE);
   }
 
   handleFirstNumber(digit) {
-    let { firstNumber, secondNumber, sum } = this.state;
+    let { firstNumber, secondNumber, multiple } = this.state;
 
     firstNumber = Number(digit);
-    sum = firstNumber * secondNumber;
+    multiple = firstNumber * secondNumber;
 
     this.setState({
       ...this.state,
       firstNumber,
       secondNumber,
-      sum,
+      multiple,
     });
   }
 
@@ -58,7 +58,7 @@ class Multiplication_table extends React.Component {
   }
 
   render() {
-    const { firstNumber, secondNumber, sum, evalutaion } = this.state;
+    const { firstNumber, secondNumber, multiple, evalutaion } = this.state;
 
     return (
       <div className='multiplication_table-container'>
@@ -72,21 +72,21 @@ class Multiplication_table extends React.Component {
           type='button'
           onClick={() => {
             this.handleNotANumberMessage(this.muliplicationInput, this.notANumberMessage);
-            inputValidation(this.muliplicationInput, sum, Number) ? this.updateStateNumbers() : this.setState({ ...this.state, evalutaion: false });
+            inputValidation(this.muliplicationInput, multiple, Number) ? this.updateStateNumbers() : this.setState({ ...this.state, evalutaion: false });
             clearInputValue(this.muliplicationInput);
           }}
         >
           입력
         </button>
-        <p className={!evalutaion ? '' : 'hide'} ref={(ref) => (this.incorrectMessage = ref)} style={{ color: 'red' }}>
+        <p className={!evalutaion ? '' : CLASSNAME.HIDE} ref={(ref) => (this.incorrectMessage = ref)} style={{ color: COLOR.RED }}>
           정답이 아닙니다.
         </p>
         <p
-          className='hide'
+          className={CLASSNAME.HIDE}
           ref={(ref) => {
             this.notANumberMessage = ref;
           }}
-          style={{ color: 'red' }}
+          style={{ color: COLOR.RED }}
         >
           숫자만 입력이 가능합니다.
         </p>

@@ -1,21 +1,25 @@
 import React from 'react';
 import { fetch우리말api } from '../../common/api.js';
+import { COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants.js';
 import { 한글_정규표현식 } from '../../common/regex.js';
+import { clearInputValue } from '../../utils/utils.js';
+import { isValidInputWord } from '../../utils/validator.js';
 
 class Word_relay extends React.Component {
   state = {
     prevWord: '',
-    currentWord: '곰자리',
+    currentWord: DEFAULT.GIVEN_WORD,
     definition: '',
+    loading: false,
   };
 
   handleErrorMessage(word, currentWord) {
     if ((word.length > 3 || word.length < 3) && 한글_정규표현식.test(word)) {
-      return '세글자만 입력이 가능합니다.';
+      return ERROR_MESSAGE.NOT_THREE_WORD;
     } else if (!한글_정규표현식.test(word)) {
-      return '한글만 입력이 가능합니다.';
+      return ERROR_MESSAGE.NOT_KOREAN;
     } else if (currentWord.at(-1) !== word[0]) {
-      return `단어의 마지막 글자와 ${'\t'}입력단어의 첫번째 단어가 일치해야 합니다.`;
+      return ERROR_MESSAGE.NOT_CORRESPONDING_LETTER;
     } else {
       return undefined;
     }
@@ -25,35 +29,27 @@ class Word_relay extends React.Component {
     this.errorMessage.textContent = message;
   }
 
-  isValidInputWord(errorMessage) {
-    let isValid = false;
-
-    if (!errorMessage) {
-      isValid = true;
-    }
-
-    return isValid;
-  }
-
   async handleSubmitButton(word) {
-    let { prevWord, currentWord, definition } = this.state;
-
-    prevWord = currentWord;
-    definition = await fetch우리말api(word);
-    currentWord = word;
-
-    console.log(definition);
+    let { currentWord } = this.state;
 
     this.setState({
-      ...this.state,
-      prevWord,
-      currentWord,
-      definition,
+      loading: true,
+    });
+
+    // 로딩상태 비동기적 업데이트 ??
+    setTimeout(async () => {
+      this.setState({
+        ...this.state,
+        prevWord: currentWord,
+        currentWord: word,
+        definition: await fetch우리말api(word),
+        loading: false,
+      });
     });
   }
 
   render() {
-    const { currentWord, definition } = this.state;
+    const { currentWord, definition, loading } = this.state;
 
     return (
       <div className='word_relay-container'>
@@ -65,16 +61,19 @@ class Word_relay extends React.Component {
 
             this.updateErrorMessage(errorMessageHandler);
 
-            if (this.isValidInputWord(errorMessageHandler)) {
+            if (isValidInputWord(errorMessageHandler)) {
               this.handleSubmitButton(this.wordInput.value);
             }
+
+            clearInputValue(this.wordInput);
           }}
           type='submit'
         >
           입력
         </button>
-        <p className='word_definition'>{definition ? definition : '결과가 없습니다'}</p>
-        <p style={{ color: 'red' }} ref={(ref) => (this.errorMessage = ref)}></p>
+        <p className={loading ? '' : 'hide'}>로딩중...</p>
+        <p className={loading ? 'hide' : ''}>{definition ? definition : ERROR_MESSAGE.EMPTY_INPUT}</p>
+        <p style={{ color: COLOR.RED }} ref={(ref) => (this.errorMessage = ref)}></p>
       </div>
     );
   }

@@ -5,7 +5,6 @@ import Word_relay from './components/word-relay/word-relay';
 import './App.css';
 import ComputherVsButton from './components/word-relay/computerVsButton';
 import ComputerWordRelay from './components/word-relay/computer-word-relay';
-import { fetch우리말api } from './common/api';
 
 const GlobalStyle = createGlobalStyle`
   body {
