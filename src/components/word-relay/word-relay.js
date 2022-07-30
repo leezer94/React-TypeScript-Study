@@ -47,6 +47,17 @@ class Word_relay extends React.Component {
       });
     });
   }
+  onClickEvent(currentWord) {
+    const errorMessageHandler = this.handleErrorMessage(this.wordInput.value, currentWord);
+
+    this.updateErrorMessage(errorMessageHandler);
+
+    if (isValidInputWord(errorMessageHandler)) {
+      this.handleSubmitButton(this.wordInput.value);
+    }
+
+    clearInputValue(this.wordInput);
+  }
 
   render() {
     const { currentWord, definition, loading } = this.state;
@@ -54,24 +65,11 @@ class Word_relay extends React.Component {
     return (
       <div className='word_relay-container'>
         <p className='curernt-word'>{currentWord}</p>
-        <input ref={(ref) => (this.wordInput = ref)} type='text'></input>
-        <button
-          onClick={() => {
-            const errorMessageHandler = this.handleErrorMessage(this.wordInput.value, currentWord);
-
-            this.updateErrorMessage(errorMessageHandler);
-
-            if (isValidInputWord(errorMessageHandler)) {
-              this.handleSubmitButton(this.wordInput.value);
-            }
-
-            clearInputValue(this.wordInput);
-          }}
-          type='submit'
-        >
+        <input ref={(ref) => (this.wordInput = ref)} type='text' onKeyPress={(e) => (e.key === 'Enter' ? this.onClickEvent(currentWord) : '')}></input>
+        <button onClick={() => this.onClickEvent(currentWord)} type='submit'>
           입력
         </button>
-        <p className={loading ? '' : 'hide'}>로딩중...</p>
+        <p className={loading ? '' : 'hide'}>사전 검색중...</p>
         <p className={loading ? 'hide' : ''}>{definition ? definition : ERROR_MESSAGE.EMPTY_INPUT}</p>
         <p style={{ color: COLOR.RED }} ref={(ref) => (this.errorMessage = ref)}></p>
       </div>

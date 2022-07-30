@@ -21,6 +21,8 @@ const GlobalStyle = createGlobalStyle`
     border-radius : 20px;
     background-color : white;
   }
+
+  
 `;
 
 class App extends React.Component {
