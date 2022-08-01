@@ -2,9 +2,8 @@ import React from 'react';
 import { fetch우리말api } from '../../common/api.js';
 import { COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants.js';
 import { 한글_정규표현식 } from '../../common/regex.js';
-import { clearInputValue } from '../../utils/utils.js';
+import { addClassList, clearInputValue } from '../../utils/utils.js';
 import { isValidInputWord } from '../../utils/validator.js';
-
 class Word_relay extends React.Component {
   state = {
     prevWord: '',
@@ -36,16 +35,29 @@ class Word_relay extends React.Component {
       loading: true,
     });
 
-    // 로딩상태 비동기적 업데이트 ??
-    setTimeout(async () => {
-      this.setState({
-        ...this.state,
-        prevWord: currentWord,
-        currentWord: word,
-        definition: await fetch우리말api(word),
-        loading: false,
+    if (await fetch우리말api(word)) {
+      // 사전에 있는 단어일 경우에만 진행가능하게 ??
+      // 로딩상태 비동기적 업데이트 ??
+      setTimeout(async () => {
+        this.setState({
+          ...this.state,
+          prevWord: currentWord,
+          currentWord: word,
+          definition: await fetch우리말api(word),
+          loading: false,
+        });
       });
-    });
+    } else {
+      setTimeout(async () => {
+        this.setState({
+          ...this.state,
+          prevWord: currentWord,
+          currentWord: currentWord,
+          definition: '',
+          loading: false,
+        });
+      });
+    }
   }
   onClickEvent(currentWord) {
     const errorMessageHandler = this.handleErrorMessage(this.wordInput.value, currentWord);
@@ -64,8 +76,8 @@ class Word_relay extends React.Component {
 
     return (
       <div className='word_relay-container'>
-        <p className='curernt-word'>{currentWord}</p>
-        <input ref={(ref) => (this.wordInput = ref)} type='text' onKeyPress={(e) => (e.key === 'Enter' ? this.onClickEvent(currentWord) : '')}></input>
+        <p className='current-word'>{currentWord}</p>
+        <input ref={(ref) => (this.wordInput = ref)} type='text' onKeyPress={({ key }) => (key === 'Enter' ? this.onClickEvent(currentWord) : '')}></input>
         <button onClick={() => this.onClickEvent(currentWord)} type='submit'>
           입력
         </button>
