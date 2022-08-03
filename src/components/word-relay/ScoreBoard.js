@@ -1,14 +1,18 @@
 import React from 'react';
 
-class ComputerWordRelay extends React.Component {
+class ScoreBoard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    const { score } = this.props;
+
     return (
-      <div className='computer_relay_main'>
+      <div className='score_board_main'>
         <div className='key-word'></div>
-        <input type='text' ref={(ref) => (this.computerRelayInput = ref)} autoComplete='off'></input>
         <div className='time-zone'></div>
         <div className='point'>
-          <span>점수 :</span>
+          {/* <span>점수 : {score}</span> */}
           <span ref={(ref) => (this.pointSpan = ref)}></span>
         </div>
       </div>
@@ -16,4 +20,4 @@ class ComputerWordRelay extends React.Component {
   }
 }
 
-export default ComputerWordRelay;
+export default ScoreBoard;

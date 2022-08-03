@@ -3,8 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import Multiplication_table from './components/muliplication-table/muliplication-table';
 import Word_relay from './components/word-relay/word-relay';
 import './App.css';
-import ComputherVsButton from './components/word-relay/computerVsButton';
-import ComputerWordRelay from './components/word-relay/computer-word-relay';
+import Button from './components/word-relay/Button';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,32 +20,32 @@ const GlobalStyle = createGlobalStyle`
     border-radius : 20px;
     background-color : white;
   }
-
-  
 `;
 
 class App extends React.Component {
   state = {
-    currentGame: 'vsComputer',
+    currentPage: '점수확인하기',
   };
 
   handleComputerGameButton = () => {
-    const { currentGame } = this.state;
+    const { currentPage } = this.state;
 
     this.setState({
       ...this.state,
-      currentGame: currentGame === 'vsComputer' ? 'onYourOwn' : 'vsComputer',
+      currentPage: currentPage === '점수확인하기' ? '게임으로 돌아가기' : '점수확인하기',
     });
   };
 
   render() {
+    const { currentPage } = this.state;
+
     return (
       <>
         <GlobalStyle />
         <div className='App'>
           <Multiplication_table />
-          <ComputherVsButton key={0} value={this.state.currentGame} onClickComputerGameButton={this.handleComputerGameButton} />
-          {this.state.currentGame === 'onYourOwn' ? <ComputerWordRelay /> : <Word_relay />}
+          <Button key={0} value={currentPage} onClickComputerGameButton={this.handleComputerGameButton} />
+          <Word_relay currentPage={currentPage} />
         </div>
       </>
     );
