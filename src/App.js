@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import Multiplication_table2 from './components/multiplication-table/multiplication-table2';
+import Multiplication_table from './components/multiplication-table/multiplication-table';
 import Word_relay from './components/word-relay/word-relay';
 import './App.css';
 import Button from './components/word-relay/Button';
@@ -34,7 +34,7 @@ const App = () => {
       <GlobalStyle />
       <div className='App'>
         {/* <Multiplication_table /> */}
-        <Multiplication_table2 />
+        <Multiplication_table />
         <Button value={currentPage} onClickComputerGameButton={handleComputerGameButton} />
         <Word_relay currentPage={currentPage} />
       </div>
