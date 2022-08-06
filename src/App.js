@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import Multiplication_table from './components/muliplication-table/muliplication-table';
+import Multiplication_table2 from './components/multiplication-table/multiplication-table2';
 import Word_relay from './components/word-relay/word-relay';
 import './App.css';
 import Button from './components/word-relay/Button';
@@ -22,34 +22,24 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-class App extends React.Component {
-  state = {
-    currentPage: '점수확인하기',
+const App = () => {
+  const [currentPage, setCurrentPage] = useState('점수확인하기');
+
+  const handleComputerGameButton = () => {
+    setCurrentPage(currentPage === '점수확인하기' ? '게임으로 돌아가기' : '점수확인하기');
   };
 
-  handleComputerGameButton = () => {
-    const { currentPage } = this.state;
-
-    this.setState({
-      ...this.state,
-      currentPage: currentPage === '점수확인하기' ? '게임으로 돌아가기' : '점수확인하기',
-    });
-  };
-
-  render() {
-    const { currentPage } = this.state;
-
-    return (
-      <>
-        <GlobalStyle />
-        <div className='App'>
-          <Multiplication_table />
-          <Button key={0} value={currentPage} onClickComputerGameButton={this.handleComputerGameButton} />
-          <Word_relay currentPage={currentPage} />
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <GlobalStyle />
+      <div className='App'>
+        {/* <Multiplication_table /> */}
+        <Multiplication_table2 />
+        <Button value={currentPage} onClickComputerGameButton={handleComputerGameButton} />
+        <Word_relay currentPage={currentPage} />
+      </div>
+    </>
+  );
+};
 
 export default App;

@@ -1,5 +1,8 @@
 export const inputValidation = (input, sum, type) => {
-  const inputValue = input.value;
+  // 클래스형 컴포넌트용
+  // const inputValue = input.value;
+
+  const inputValue = input.current.value;
 
   let isValid = false;
 
@@ -11,15 +14,25 @@ export const inputValidation = (input, sum, type) => {
 };
 
 export const removeClassList = (element, property) => {
-  element.classList.remove(property);
+  // 클래스형 컴포넌트용
+  // element.classList.remove(property);
+
+  console.log(element.current.classList);
+
+  element.current.classList.remove(property);
 };
 
 export const addClassList = (element, property) => {
-  element.classList.add(property);
+  // 클래스형 컴포넌트용
+  // element.classList.add(property);
+
+  console.log(element.current);
+
+  element.current.classList.add(property);
 };
 
-export const generateRandomNumber = (range) => {
-  return Math.floor(Math.random() * range) + 1;
+export const generateRandomNumber = (start, end) => {
+  return Math.floor(Math.random() * end) + start;
 };
 
 export const getRightEqualSignLetter = (number) => {
@@ -30,5 +43,9 @@ export const getRightEqualSignLetter = (number) => {
 };
 
 export const clearInputValue = (...inputs) => {
-  inputs.map((input) => (input.value = ''));
+  inputs.map((input) => (input.current.value = ''));
+};
+
+export const createEmptyArray = (length) => {
+  return Array.from({ length: length }, (v, i) => i++);
 };

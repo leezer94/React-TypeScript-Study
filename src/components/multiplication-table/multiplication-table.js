@@ -1,29 +1,37 @@
 import React from 'react';
 import { CLASSNAME, COLOR } from '../../common/constants/constants.js';
-import { inputValidation, removeClassList, addClassList, generateRandomNumber, getRightEqualSignLetter, clearInputValue } from '../../utils/utils.js';
-import DigitButton from './DigitButton.js';
+import {
+  inputValidation,
+  removeClassList,
+  addClassList,
+  generateRandomNumber,
+  getRightEqualSignLetter,
+  clearInputValue,
+  createEmptyArray,
+} from '../../utils/utils.js';
+import DigitButton from '../@commons/Button/DigitButton';
 
 class Multiplication_table extends React.Component {
   state = {
     firstNumber: 9,
     secondNumber: 2,
-    multiple: 9 * 2,
-    evalutaion: true,
+    sum: 9 * 2,
+    evaluation: true,
   };
 
   updateStateNumbers() {
-    let { firstNumber, secondNumber, multiple } = this.state;
+    let { firstNumber, secondNumber, sum } = this.state;
 
-    firstNumber = generateRandomNumber(9);
-    secondNumber = generateRandomNumber(9);
-    multiple = firstNumber * secondNumber;
+    firstNumber = generateRandomNumber(1, 9);
+    secondNumber = generateRandomNumber(1, 9);
+    sum = firstNumber * secondNumber;
 
     this.setState({
       ...this.state,
       firstNumber,
       secondNumber,
-      multiple,
-      evalutaion: true,
+      sum,
+      evaluation: true,
     });
   }
 
@@ -34,21 +42,21 @@ class Multiplication_table extends React.Component {
   }
 
   handleFirstNumber(digit) {
-    let { firstNumber, secondNumber, multiple } = this.state;
+    let { firstNumber, secondNumber, sum } = this.state;
 
     firstNumber = Number(digit);
-    multiple = firstNumber * secondNumber;
+    sum = firstNumber * secondNumber;
 
     this.setState({
       ...this.state,
       firstNumber,
       secondNumber,
-      multiple,
+      sum,
     });
   }
 
   buttonTemplates() {
-    const templates = new Array(9).fill('');
+    const templates = createEmptyArray(9);
 
     templates.map((el, i) => {
       templates[i] = <DigitButton key={i} digit={i + 1} updateFirstNumber={this.handleFirstNumber.bind(this)} />;
@@ -58,7 +66,7 @@ class Multiplication_table extends React.Component {
   }
 
   render() {
-    const { firstNumber, secondNumber, multiple, evalutaion } = this.state;
+    const { firstNumber, secondNumber, sum, evaluation } = this.state;
 
     return (
       <div className='multiplication_table-container'>
@@ -67,18 +75,18 @@ class Multiplication_table extends React.Component {
           {this.buttonTemplates()}
         </div>
         <p>{`${firstNumber} 곱하기 ${secondNumber} ${getRightEqualSignLetter(secondNumber)}?`}</p>
-        <input ref={(ref) => (this.muliplicationInput = ref)} type='text'></input>
+        <input ref={(ref) => (this.multiplicationInput = ref)} type='text'></input>
         <button
           type='button'
           onClick={() => {
-            this.handleNotANumberMessage(this.muliplicationInput, this.notANumberMessage);
-            inputValidation(this.muliplicationInput, multiple, Number) ? this.updateStateNumbers() : this.setState({ ...this.state, evalutaion: false });
-            clearInputValue(this.muliplicationInput);
+            this.handleNotANumberMessage(this.multiplicationInput, this.notANumberMessage);
+            inputValidation(this.multiplicationInput, sum, Number) ? this.updateStateNumbers() : this.setState({ ...this.state, evaluation: false });
+            clearInputValue(this.multiplicationInput);
           }}
         >
           입력
         </button>
-        <p className={!evalutaion ? '' : CLASSNAME.HIDE} ref={(ref) => (this.incorrectMessage = ref)} style={{ color: COLOR.RED }}>
+        <p className={!evaluation ? '' : CLASSNAME.HIDE} ref={(ref) => (this.incorrectMessage = ref)} style={{ color: COLOR.RED }}>
           정답이 아닙니다.
         </p>
         <p
