@@ -16,6 +16,11 @@ const NavbarContainer = () => {
             구구단
           </Link>
         </li>
+        <li>
+          <Link to='/baseballgame' style={{ color: 'blue' }}>
+            숫자야구게임
+          </Link>
+        </li>
       </ul>
     </div>
   );
