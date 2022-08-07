@@ -1,44 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import Multiplication_table from './components/multiplication-table/multiplication-table';
-import Word_relay from './components/word-relay/word-relay';
+import MultiplicationTable from './components/multiplication-table/multiplication-table';
+import WordRelay from './components/word-relay/word-relay';
 import './App.css';
-import Button from './components/word-relay/Button';
+import Navbar from './components/Navbar/Navbar';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    background: #e9ecef;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-  .App {
-    width: 300px;
-    height: 500px;
-    margin: 0 auto;
-    margin-top : 100px;
+body {
+  height: 125vh;
+  font-family: sans-serif;
+  margin-top: 80px;
+  padding: 30px;
+}
 
-    border : 1px solid black;
-    border-radius : 20px;
-    background-color : white;
-  }
+p {
+  font-size : 18px
+  font-weight : 600
+}
+
+.header {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 black;
+}
+
+.header * {
+  display: inline;
+}
+
+.header li {
+  margin: 20px;
+}
+
+.header li a {
+  color: black;
+  text-decoration: none;
+}
 `;
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState('점수확인하기');
-
-  const handleComputerGameButton = () => {
-    setCurrentPage(currentPage === '점수확인하기' ? '게임으로 돌아가기' : '점수확인하기');
-  };
-
   return (
-    <>
+    <div className='App'>
       <GlobalStyle />
-      <div className='App'>
-        {/* <Multiplication_table /> */}
-        <Multiplication_table />
-        <Button value={currentPage} onClickComputerGameButton={handleComputerGameButton} />
-        <Word_relay currentPage={currentPage} />
-      </div>
-    </>
+      <Navbar />
+      <Routes>
+        <Route path='/multiplication' element={<MultiplicationTable />}></Route>
+        <Route path='/wordRelay' element={<WordRelay />}></Route>
+      </Routes>
+    </div>
   );
 };
 

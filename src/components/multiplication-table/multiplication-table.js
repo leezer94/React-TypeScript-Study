@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { generateRandomNumber } from '../../utils/utils.js';
 import DigitButtonContainer from './DigitButtonContainer.js';
 import MultiplicationMainContainer from './Game-main-container.js';
+import { generateRandomNumber } from '../../utils/utils.js';
 
 //TODO 아토믹 패턴 ?? 컴포넌트화 기준 나누기?? 타입스크립트 적용?? styledComponent 적용 ?
 
-const Multiplication_table = () => {
+const MultiplicationTable = () => {
   const [state, setState] = useState({ firstNumber: 9, secondNumber: 2, sum: 9 * 2 });
   const [evaluation, setEvaluation] = useState(true);
 
@@ -33,4 +33,4 @@ const Multiplication_table = () => {
   );
 };
 
-export default Multiplication_table;
+export default MultiplicationTable;
