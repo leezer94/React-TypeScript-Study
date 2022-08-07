@@ -13,20 +13,6 @@ export const inputValidation = (input, sum, type) => {
   return isValid;
 };
 
-export const removeClassList = (element, property) => {
-  // 클래스형 컴포넌트용
-  // element.classList.remove(property);
-
-  element.current.classList.remove(property);
-};
-
-export const addClassList = (element, property) => {
-  // 클래스형 컴포넌트용
-  // element.classList.add(property);
-
-  element.current.classList.add(property);
-};
-
 export const generateRandomNumber = (start, end) => {
   return Math.floor(Math.random() * end) + start;
 };
