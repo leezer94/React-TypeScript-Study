@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-const P = forwardRef((props, forwardRef) => {
+export const P = forwardRef((props, forwardRef) => {
   const { className, style, title } = props;
 
   return (
@@ -9,5 +9,3 @@ const P = forwardRef((props, forwardRef) => {
     </p>
   );
 });
-
-export default P;

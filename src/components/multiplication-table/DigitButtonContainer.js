@@ -1,7 +1,7 @@
 import React from 'react';
 import uuid from 'react-uuid';
 import DigitButton from '../@commons/Button/DigitButton';
-import P from '../@commons/P/P';
+import { P } from '..';
 import { createEmptyArray } from '../../utils/utils';
 
 const DigitButtonContainer = ({ state, setState }) => {

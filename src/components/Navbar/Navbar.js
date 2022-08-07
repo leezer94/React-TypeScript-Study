@@ -1,5 +1,5 @@
 import React from 'react';
-import Flex from '../@commons/Flex/Flex';
+import { Flex } from '..';
 import NavbarContainer from './NavbarContainer';
 
 const Navbar = () => {

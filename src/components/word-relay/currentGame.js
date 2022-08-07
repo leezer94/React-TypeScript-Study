@@ -4,12 +4,10 @@ import { isValidInputWord } from '../../utils/validator.js';
 import { fetch우리말api } from '../../common/api.js';
 import { CLASSNAME, COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants.js';
 import { useRef, useState } from 'react';
-import Button from '../@commons/Button/Button.js';
-import Input from '../@commons/Input/Input.js';
-import Form from '../@commons/Form/Form.js';
+import { Button, Input, Form } from '..';
 
 const CurrentGame = () => {
-  const [state, setState] = useState({ prevWord: '', currentWord: DEFAULT.GIVEN_WORD, definition: '', loading: false });
+  const [state, setState] = useState({ prevWord: undefined, currentWord: DEFAULT.GIVEN_WORD, definition: undefined, loading: false });
 
   const wordInput = useRef();
   const errorMessage = useRef();
@@ -53,7 +51,7 @@ const CurrentGame = () => {
         setState({
           ...state,
           prevWord: currentWord,
-          definition: '',
+          definition: undefined,
           loading: false,
         });
       });
@@ -71,8 +69,8 @@ const CurrentGame = () => {
     clearInputValue(wordInput);
   };
 
-  const handleKeyPressEvent = ({ key }) => {
-    return key === 'Enter' ? onClickSubmitButton(currentWord) : undefined;
+  const handleKeyPressEvent = (e) => {
+    return e.key === 'Enter' ? handleSubmitWord(e) : undefined;
   };
 
   const handleSubmitWord = (e) => {
@@ -90,8 +88,8 @@ const CurrentGame = () => {
       <p className='current-word'>{currentWord}</p>
       <Input ref={wordInput} type='text' onKeyPressEvent={handleKeyPressEvent} />
       <Button type={'submit'} title={'입력'} />
-      <p className={loading ? '' : CLASSNAME.HIDE}>사전 검색중...</p>
-      <p className={loading ? CLASSNAME.HIDE : ''}>{definition ? definition : ERROR_MESSAGE.EMPTY_INPUT}</p>
+      <p className={loading ? undefined : CLASSNAME.HIDE}>사전 검색중...</p>
+      <p className={loading ? CLASSNAME.HIDE : undefined}>{definition ? definition : ERROR_MESSAGE.EMPTY_INPUT}</p>
       <p style={{ color: COLOR.RED }} ref={errorMessage}></p>
     </Form>
   );
