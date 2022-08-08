@@ -9,11 +9,9 @@ import ResultTemplate from './ResultTemplate';
 
 const BaseballGame = () => {
   // 상태는 비동기 기억하기
-  const [state, setState] = useState({ targetNumber: createRandomNumbers(), currentValue: undefined });
+  const [state, setState] = useState({ targetNumber: createRandomNumbers(), currentValue: undefined, tryLog: [] });
   // strikeCount, ballCount 배열로 보관
   const [gameCounts, setGameCounts] = useState([]);
-  // 입력한 숫자 로그 저장
-  const [tryLog, setTryLog] = useState('');
   // 에러메시지 관련 상태
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -30,37 +28,30 @@ const BaseballGame = () => {
     // 유효성검사 통과 후 시점에 필요한 데이터들이 준비가 되어있어야함
 
     if (!errorMessageArray.length) {
-      const currentValue = baseballGameInput.current.value;
-      const { targetNumber } = state;
-
-      const [strikeCount, ballCount] = compareTwoArrays(targetNumber, currentValue);
-
-      console.log(Array.from(targetNumber));
-      console.log('strike', strikeCount);
-      console.log('ball', ballCount);
-
-      setGameCounts([...gameCounts, { strikeCount, ballCount }]);
+      updateGameCounts();
+      updateInputValue(baseballGameInput);
     }
 
     setErrorMessage(errorMessageArray);
     clearInputValue(baseballGameInput);
+  };
 
-    // useEffect(() => {
-    //   first;
-    //   // 컴포넌트의 생명주기에 따라서 동작
-    //   //third 만약 빈 배열일시 첫번째 로 마운트되고 나서 실행
+  const updateInputValue = (input) => {
+    const inputValue = input.current.value;
+    const { tryLog } = state;
+    setState({
+      ...state,
+      currentValue: inputValue,
+      tryLog: [...tryLog, inputValue],
+    });
+  };
 
-    //   setState()
+  const updateGameCounts = () => {
+    const currentValue = baseballGameInput.current.value;
+    const { targetNumber } = state;
+    const [strikeCount, ballCount] = compareTwoArrays(targetNumber, currentValue);
 
-    //   return () => {
-    //     second;
-    //     // clean up function
-
-    //     // 컴포넌트가 사라지는 시점에 실행
-    //   };
-    // }, [strikeCount]
-    // // 의존성 배열 안의 상태로 추적하고 싶은 값을 넣어논다.
-    // );
+    setGameCounts([...gameCounts, { strikeCount, ballCount }]);
   };
 
   const handleKeyPressEvent = (e) => {
@@ -77,37 +68,17 @@ const BaseballGame = () => {
     return templates;
   };
 
-  const handleUserInputValue = (input) => {
-    const inputValue = Number(input.current.value);
-
-    setState({
-      ...state,
-      currentValue: inputValue,
-    });
-
-    setTryLog([...tryLog, inputValue]);
-  };
-
   const createCountTemplates = () => {
-    // refactor
-    const { targetNumber, currentValue } = state;
+    // Here needs to be refactored
 
-    const currentValueArray = String(currentValue).split('').map(Number);
-    // Set -> 배열로 변환
-    const targetNumberArray = Array.from(targetNumber);
-    const templates = createEmptyArray(tryLog.length);
+    const templates = createEmptyArray(gameCounts.length);
+    const { tryLog } = state;
 
-    const [strikeCount, ballCount] = compareTwoArrays(targetNumberArray, currentValueArray);
+    gameCounts.map((game, i) => {
+      const { strikeCount, ballCount } = game;
 
-    // 배열 을 만들어주고 , 그 배열을 렌더링한다.
-    // 배열이 가지고 있는 정보 ??
-    // 데이터랑 UI를 분리
-
-    if (currentValue) {
-      templates.map((data, i) => {
-        return (templates[i] = <ResultTemplate key={uuid()} index={i} strikeCount={strikeCount} ballCount={ballCount} tryLog={tryLog} />);
-      });
-    }
+      return (templates[i] = <ResultTemplate key={uuid()} index={i} strikeCount={strikeCount} ballCount={ballCount} tryLog={tryLog} />);
+    });
 
     return templates;
   };
@@ -122,9 +93,8 @@ const BaseballGame = () => {
       {!errorMessage ? null : createErrorMessages(errorMessage)}
       {currentValue ? createCountTemplates() : null}
 
-      {/* // 파라미터 내에서 분해 */}
-      {/* {currentValue ? datas.map(( {1,2,3,4,5} ,index) => <ResultTemplate 1 2 3 4 5/>)} */}
-      {console.log(gameCounts)}
+      {/* needs to be refactored like underneath code */}
+      {/* {currentValue ? .map(( {1,2,3,4,5} ,index) => <ResultTemplate 1 2 3 4 5/>)} */}
     </Form>
   );
 };
