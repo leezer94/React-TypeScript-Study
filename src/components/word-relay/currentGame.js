@@ -96,5 +96,3 @@ const CurrentGame = () => {
 };
 
 export default CurrentGame;
-
-// onClickEvent={() => handleClickButton(currentWord)}

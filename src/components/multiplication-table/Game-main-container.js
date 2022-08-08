@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Form, P, Input, Button } from '..';
 import { CLASSNAME, COLOR } from '../../common/constants/constants.js';
-import { inputValidation, getRightEqualSignLetter, clearInputValue } from '../../utils/utils.js';
+import { getRightEqualSignLetter, clearInputValue } from '../../utils/utils.js';
+import { isValidNumberTypeInput } from '../../utils/validator';
 
 const MultiplicationMainContainer = (props) => {
   const { state, updateStateNumbers, evaluation, handleEvaluation } = props;
@@ -19,7 +20,7 @@ const MultiplicationMainContainer = (props) => {
 
   const onClickSubmitButton = () => {
     isNumberTypeInputValue(multiplicationInput);
-    inputValidation(multiplicationInput, sum, Number) ? updateStateNumbers() : handleEvaluation(false);
+    isValidNumberTypeInput(multiplicationInput, sum, Number) ? updateStateNumbers() : handleEvaluation(false);
     clearInputValue(multiplicationInput);
   };
 

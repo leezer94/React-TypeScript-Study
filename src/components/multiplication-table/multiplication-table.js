@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
+import { generateRandomNumber } from '../../utils/mathUtils.js';
 import DigitButtonContainer from './DigitButtonContainer.js';
 import MultiplicationMainContainer from './Game-main-container.js';
-import { generateRandomNumber } from '../../utils/utils.js';
-
 //TODO 아토믹 패턴 ?? 컴포넌트화 기준 나누기?? 타입스크립트 적용?? styledComponent 적용 ?
 
 const MultiplicationTable = () => {
