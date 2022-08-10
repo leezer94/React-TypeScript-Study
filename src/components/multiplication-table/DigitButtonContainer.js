@@ -20,7 +20,7 @@ const DigitButtonContainer = ({ state, setState }) => {
   const buttonTemplates = () => {
     const templates = createEmptyArray(9);
     templates.map((el, i) => {
-      return (templates[i] = <DigitButton key={uuid()} digit={i + 1} updateFirstNumber={handleFirstNumber} />);
+      return (templates[i] = <DigitButton key={uuid()} digit={i + 1} updateNumber={handleFirstNumber} />);
     });
 
     return templates;

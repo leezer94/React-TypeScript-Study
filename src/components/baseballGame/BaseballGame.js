@@ -6,10 +6,12 @@ import { createRandomNumbers } from '../../utils/mathUtils';
 import { clearInputValue, compareTwoArrays, createEmptyArray } from '../../utils/utils';
 import { getErrorMessages } from '../../utils/validator';
 import ResultTemplate from './ResultTemplate';
+import DigitButton from '../@commons/Button/DigitButton';
 
 const BaseballGame = () => {
+  const [lengthOfArray, setLengthOfArray] = useState(4);
   // 상태는 비동기 기억하기
-  const [state, setState] = useState({ targetNumber: createRandomNumbers(), currentValue: undefined, tryLog: [] });
+  const [state, setState] = useState({ targetNumber: createRandomNumbers(lengthOfArray), currentValue: null, tryLog: [] });
   // strikeCount, ballCount 배열로 보관
   const [gameCounts, setGameCounts] = useState([]);
   // 에러메시지 관련 상태
@@ -20,14 +22,26 @@ const BaseballGame = () => {
   const baseballGameInput = useRef();
 
   //handlers
+  const resetState = (message) => {
+    alert(message);
+
+    setState({
+      targetNumber: createRandomNumbers(),
+      currentValue: null,
+      tryLog: [],
+    });
+
+    setGameCounts([]);
+    setErrorMessage(null);
+  };
+
   const onSubmitBaseballGame = (e) => {
     e.preventDefault();
-    const errorMessageArray = Array.from(getErrorMessages(baseballGameInput));
 
-    // 유효성 검사
-    // 유효성검사 통과 후 시점에 필요한 데이터들이 준비가 되어있어야함
+    const errorMessageArray = Array.from(getErrorMessages(baseballGameInput, tryLog, lengthOfArray));
+    const tryLogContainsCurrentValue = tryLog.includes(baseballGameInput.current.value);
 
-    if (!errorMessageArray.length) {
+    if (!errorMessageArray.length && !tryLogContainsCurrentValue) {
       updateGameCounts();
       updateInputValue(baseballGameInput);
     }
@@ -39,6 +53,7 @@ const BaseballGame = () => {
   const updateInputValue = (input) => {
     const inputValue = input.current.value;
     const { tryLog } = state;
+
     setState({
       ...state,
       currentValue: inputValue,
@@ -50,8 +65,12 @@ const BaseballGame = () => {
     const currentValue = baseballGameInput.current.value;
     const { targetNumber } = state;
     const [strikeCount, ballCount] = compareTwoArrays(targetNumber, currentValue);
+    const answer = Array.from(targetNumber).join('');
 
     setGameCounts([...gameCounts, { strikeCount, ballCount }]);
+
+    if (strikeCount === lengthOfArray) resetState('정답입니다! 게임을 리셋 하시겠습니까?');
+    if (tryLog.length === 10) resetState(`10회 시도에 도달하였습니다. 정답은 : ${answer} 입니다.`);
   };
 
   const handleKeyPressEvent = (e) => {
@@ -69,10 +88,8 @@ const BaseballGame = () => {
   };
 
   const createCountTemplates = () => {
-    // Here needs to be refactored
-
-    const templates = createEmptyArray(gameCounts.length);
     const { tryLog } = state;
+    const templates = createEmptyArray(gameCounts.length);
 
     gameCounts.map((game, i) => {
       const { strikeCount, ballCount } = game;
@@ -83,18 +100,36 @@ const BaseballGame = () => {
     return templates;
   };
 
-  const { currentValue } = state;
+  const updateLengthOfArray = (number) => {
+    setLengthOfArray(number);
+
+    setState({
+      ...state,
+      targetNumber: createRandomNumbers(number),
+    });
+  };
+
+  const buttonTemplates = () => {
+    const templates = createEmptyArray(7);
+    templates.map((el, i) => {
+      return (templates[i] = <DigitButton key={uuid()} digit={i + 3} updateNumber={updateLengthOfArray} />);
+    });
+
+    return templates;
+  };
+
+  const { currentValue, tryLog } = state;
 
   return (
     <Form ref={baseballGameForm} onSubmit={onSubmitBaseballGame}>
-      <P title={'랜덤으로 제공되는 4자리 숫자를 예측해 보세요.'} />
+      {currentValue ? null : <P title={`자리수를 선택해 주세요`} />}
+      {currentValue ? null : buttonTemplates()}
+      <P title={`랜덤으로 제공되는 ${lengthOfArray}자리 숫자를 예측해 보세요.`} />
       <Input ref={baseballGameInput} onKeyPressEvent={handleKeyPressEvent} />
       <Button type={'submit'} title={'입력'} />
       {!errorMessage ? null : createErrorMessages(errorMessage)}
+      {console.log(state.targetNumber)}
       {currentValue ? createCountTemplates() : null}
-
-      {/* needs to be refactored like underneath code */}
-      {/* {currentValue ? .map(( {1,2,3,4,5} ,index) => <ResultTemplate 1 2 3 4 5/>)} */}
     </Form>
   );
 };

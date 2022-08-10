@@ -1,9 +1,9 @@
 import React from 'react';
 
 const DigitButton = (props) => {
-  const { digit, updateFirstNumber } = props;
+  const { digit, updateNumber } = props;
 
-  return <button onClick={() => updateFirstNumber(digit)}>{digit}</button>;
+  return <button onClick={() => updateNumber(digit)}>{digit}</button>;
 };
 
 export default DigitButton;
