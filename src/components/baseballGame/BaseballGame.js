@@ -70,7 +70,8 @@ const BaseballGame = () => {
     setGameCounts([...gameCounts, { strikeCount, ballCount }]);
 
     if (strikeCount === lengthOfArray) resetState('정답입니다! 게임을 리셋 하시겠습니까?');
-    if (tryLog.length === 10) resetState(`10회 시도에 도달하였습니다. 정답은 : ${answer} 입니다.`);
+    console.log(tryLog.length);
+    if (tryLog.length + 1 === 10) resetState(`10회 시도에 도달하였습니다. 정답은 : ${answer} 입니다.`);
   };
 
   const handleKeyPressEvent = (e) => {
@@ -111,6 +112,7 @@ const BaseballGame = () => {
 
   const buttonTemplates = () => {
     const templates = createEmptyArray(7);
+
     templates.map((el, i) => {
       return (templates[i] = <DigitButton key={uuid()} digit={i + 3} updateNumber={updateLengthOfArray} />);
     });
@@ -128,7 +130,6 @@ const BaseballGame = () => {
       <Input ref={baseballGameInput} onKeyPressEvent={handleKeyPressEvent} />
       <Button type={'submit'} title={'입력'} />
       {!errorMessage ? null : createErrorMessages(errorMessage)}
-      {console.log(state.targetNumber)}
       {currentValue ? createCountTemplates() : null}
     </Form>
   );
