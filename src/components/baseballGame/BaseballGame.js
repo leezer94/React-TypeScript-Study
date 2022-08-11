@@ -21,18 +21,19 @@ const BaseballGame = () => {
   const baseballGameForm = useRef();
   const baseballGameInput = useRef();
 
+  const initialState = {
+    targetNumber: createRandomNumbers(lengthOfArray),
+    currentValue: null,
+    tryLog: [],
+  };
+
   //handlers
   const resetState = (message) => {
-    alert(message);
-
-    setState({
-      targetNumber: createRandomNumbers(),
-      currentValue: null,
-      tryLog: [],
-    });
-
-    setGameCounts([]);
-    setErrorMessage(null);
+    if (!alert(message)) {
+      setState(initialState);
+      setGameCounts([]);
+      setErrorMessage(null);
+    }
   };
 
   const onSubmitBaseballGame = (e) => {
@@ -65,13 +66,17 @@ const BaseballGame = () => {
     const currentValue = baseballGameInput.current.value;
     const { targetNumber } = state;
     const [strikeCount, ballCount] = compareTwoArrays(targetNumber, currentValue);
-    const answer = Array.from(targetNumber).join('');
 
     setGameCounts([...gameCounts, { strikeCount, ballCount }]);
+  };
+
+  const handleResetGame = () => {
+    const { targetNumber } = state;
+    const strikeCount = compareTwoArrays(targetNumber, currentValue)[0];
+    const answer = Array.from(targetNumber).join('');
 
     if (strikeCount === lengthOfArray) resetState('정답입니다! 게임을 리셋 하시겠습니까?');
-    console.log(tryLog.length);
-    if (tryLog.length + 1 === 10) resetState(`10회 시도에 도달하였습니다. 정답은 : ${answer} 입니다.`);
+    if (tryLog.length === 10) resetState(`10회 시도에 도달하였습니다. 정답은 : ${answer} 입니다.`);
   };
 
   const handleKeyPressEvent = (e) => {
@@ -131,6 +136,7 @@ const BaseballGame = () => {
       <Button type={'submit'} title={'입력'} />
       {!errorMessage ? null : createErrorMessages(errorMessage)}
       {currentValue ? createCountTemplates() : null}
+      {currentValue ? handleResetGame() : null}
     </Form>
   );
 };
