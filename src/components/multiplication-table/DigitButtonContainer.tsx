@@ -1,6 +1,6 @@
 import React from 'react';
 import uuid from 'react-uuid';
-import DigitButton from '../@commons/Button/DigitButton';
+import DigitButton from '../@commons/Button/DigitButton/DigitButton';
 import { P } from '..';
 import { createEmptyArray } from '../../utils/utils';
 

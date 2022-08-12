@@ -6,7 +6,7 @@ import { createRandomNumbers } from '../../utils/mathUtils';
 import { clearInputValue, compareTwoArrays, createEmptyArray } from '../../utils/utils';
 import { getErrorMessages } from '../../utils/validator';
 import ResultTemplate from './ResultTemplate';
-import DigitButton from '../@commons/Button/DigitButton';
+import DigitButton from '../@commons/Button/DigitButton/DigitButton';
 
 const BaseballGame = () => {
   const [lengthOfArray, setLengthOfArray] = useState(4);
