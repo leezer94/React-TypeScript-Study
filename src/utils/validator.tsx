@@ -1,4 +1,4 @@
-export const isValidInputWord = (errorMessage) => {
+export const isValidInputWord = (errorMessage: []) => {
   let isValid = false;
 
   if (!errorMessage) {
@@ -8,7 +8,8 @@ export const isValidInputWord = (errorMessage) => {
   return isValid;
 };
 
-export const isValidNumberTypeInput = (input, sum, type) => {
+// here needs to be fixed
+export const isValidNumberTypeInput = (input: any, sum: number, type: any) => {
   const inputValue = input.current.value;
 
   let isValid = false;
@@ -20,10 +21,10 @@ export const isValidNumberTypeInput = (input, sum, type) => {
   return isValid;
 };
 
-// getErrorMessages
-export const getErrorMessages = (input, tryLog, lengthOfArray) => {
-  const inputValue = input.current.value;
-  const inputValueArr = inputValue.split('').map(Number);
+// here needs to be fixed
+export const getErrorMessages = (input: any, tryLog: number[], lengthOfArray: number) => {
+  const inputValue: any = input.current.value;
+  const inputValueArr: number[] = inputValue.split('').map(Number);
 
   const messageList = new Set();
 

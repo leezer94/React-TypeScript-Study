@@ -1,6 +1,6 @@
 import { 한글_정규표현식 } from '../../common/regex.js';
-import { clearInputValue } from '../../utils/utils.js';
-import { isValidInputWord } from '../../utils/validator.js';
+import { clearInputValue } from '../../utils/utils';
+import { isValidInputWord } from '../../utils/validator';
 import { fetch우리말api } from '../../common/api.js';
 import { CLASSNAME, COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants.js';
 import { useRef, useState } from 'react';

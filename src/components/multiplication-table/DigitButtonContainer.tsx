@@ -1,11 +1,23 @@
 import React from 'react';
-import uuid from 'react-uuid';
 import DigitButton from '../@commons/Button/DigitButton/DigitButton';
 import { P } from '..';
 import { createEmptyArray } from '../../utils/utils';
 
-const DigitButtonContainer = ({ state, setState }) => {
-  const handleFirstNumber = (digit) => {
+type props = {
+  state: state;
+  setState: setState;
+};
+
+type setState = any;
+
+type state = {
+  firstNumber: number;
+  secondNumber: number;
+  sum: number;
+};
+
+const DigitButtonContainer = ({ state, setState }: props) => {
+  const handleFirstNumber = (digit: number) => {
     let { firstNumber, secondNumber } = state;
 
     firstNumber = Number(digit);
@@ -18,9 +30,9 @@ const DigitButtonContainer = ({ state, setState }) => {
   };
 
   const buttonTemplates = () => {
-    const templates = createEmptyArray(9);
+    const templates: any[] = createEmptyArray(9);
     templates.map((el, i) => {
-      return (templates[i] = <DigitButton key={uuid()} digit={i + 1} updateNumber={handleFirstNumber} />);
+      return (templates[i] = <DigitButton key={i} digit={i + 1} updateNumber={handleFirstNumber} />);
     });
 
     return templates;
@@ -28,7 +40,7 @@ const DigitButtonContainer = ({ state, setState }) => {
 
   return (
     <div>
-      <P title={'구구단 몇단?'} />
+      <P title={'구구단 몇단?'} className={''} style={{}} />
       {buttonTemplates()}
     </div>
   );
