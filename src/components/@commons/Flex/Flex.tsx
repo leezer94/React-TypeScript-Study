@@ -2,7 +2,9 @@ import React from 'react';
 
 import { FlexBox } from './Flex.style';
 
-export const Flex = (props) => {
+type props = any;
+
+export const Flex = (props: props) => {
   const { children, ...rest } = props;
 
   return <FlexBox {...rest}>{children}</FlexBox>;

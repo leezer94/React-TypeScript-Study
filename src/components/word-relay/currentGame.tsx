@@ -1,19 +1,22 @@
-import { 한글_정규표현식 } from '../../common/regex.js';
+import { 한글_정규표현식 } from '../../common/regex';
 import { clearInputValue } from '../../utils/utils';
 import { isValidInputWord } from '../../utils/validator';
-import { fetch우리말api } from '../../common/api.js';
-import { CLASSNAME, COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants.js';
+import { fetch우리말api } from '../../common/api';
+import { CLASSNAME, COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants';
 import { useRef, useState } from 'react';
 import { Button, Input, Form } from '..';
+import React from 'react';
+
+type setState = any;
 
 const CurrentGame = () => {
-  const [state, setState] = useState({ prevWord: undefined, currentWord: DEFAULT.GIVEN_WORD, definition: undefined, loading: false });
+  const [state, setState] = useState<setState>({ prevWord: undefined, currentWord: DEFAULT.GIVEN_WORD, definition: undefined, loading: false });
 
-  const wordInput = useRef();
-  const errorMessage = useRef();
-  const wordRelayForm = useRef();
+  const wordInput = useRef<HTMLInputElement | any>(null);
+  const errorMessage = useRef<HTMLParagraphElement>(null);
+  const wordRelayForm = useRef<HTMLFormElement>(null);
 
-  const handleErrorMessage = (word, currentWord) => {
+  const handleErrorMessage = (word: string, currentWord: string) => {
     if ((word.length > 3 || word.length < 3) && 한글_정규표현식.test(word)) {
       return ERROR_MESSAGE.NOT_THREE_WORD;
     } else if (!한글_정규표현식.test(word)) {
@@ -25,11 +28,11 @@ const CurrentGame = () => {
     }
   };
 
-  const updateErrorMessage = (message) => {
-    errorMessage.current.textContent = message;
-  };
+  // const updateErrorMessage = (message) => {
+  //   errorMessage.current.textContent = message;
+  // };
 
-  const handleSubmitButton = async (word) => {
+  const handleSubmitButton = async (word: any) => {
     let { currentWord } = state;
 
     setState({
@@ -57,10 +60,11 @@ const CurrentGame = () => {
       });
     }
   };
-  const onClickSubmitButton = (currentWord) => {
-    const errorMessageHandler = handleErrorMessage(wordInput.current.value, currentWord);
 
-    updateErrorMessage(errorMessageHandler);
+  const onClickSubmitButton = (currentWord: string) => {
+    const errorMessageHandler: string | undefined | null = handleErrorMessage(wordInput.current.value, currentWord);
+
+    // updateErrorMessage(errorMessageHandler);
 
     if (isValidInputWord(errorMessageHandler)) {
       handleSubmitButton(wordInput.current.value);
@@ -69,11 +73,11 @@ const CurrentGame = () => {
     clearInputValue(wordInput);
   };
 
-  const handleKeyPressEvent = (e) => {
+  const handleKeyPressEvent = (e: any) => {
     return e.key === 'Enter' ? handleSubmitWord(e) : undefined;
   };
 
-  const handleSubmitWord = (e) => {
+  const handleSubmitWord = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     const { currentWord } = state;

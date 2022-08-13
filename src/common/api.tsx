@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 참고 : https://ldevlog.tistory.com/4
 
-export const fetch우리말api = async (word) => {
+export const fetch우리말api = async (word: string) => {
   const API_KEY = 'F34A53B349081AE8ECC0FF288D65F014';
   const URL = `https://opendict.korean.go.kr/api/search?key=${API_KEY}&q=${word}&advanced=y&method=exact`;
 

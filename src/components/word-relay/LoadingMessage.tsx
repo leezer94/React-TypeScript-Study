@@ -1,6 +1,11 @@
 import React from 'react';
 
-const LoadingMessage = (props) => {
+type props = {
+  className: string;
+  message: string;
+};
+
+const LoadingMessage = (props: props) => {
   const { className, message } = props;
 
   return <p className={className}>{message}</p>;

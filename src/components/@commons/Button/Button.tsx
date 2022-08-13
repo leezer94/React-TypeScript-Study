@@ -1,6 +1,12 @@
 import React from 'react';
 
-export const Button = (props) => {
+type props = {
+  type: 'submit';
+  title: string;
+  onClickEvent?: () => void;
+};
+
+export const Button = (props: props) => {
   const { type, title, onClickEvent } = props;
 
   return (

@@ -1,4 +1,4 @@
-export const isValidInputWord = (errorMessage: []) => {
+export const isValidInputWord = (errorMessage: any) => {
   let isValid = false;
 
   if (!errorMessage) {

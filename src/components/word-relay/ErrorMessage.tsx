@@ -1,7 +1,13 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { CLASSNAME, ERROR_MESSAGE } from '../../common/constants/constants';
 
-const ErrorMessage = forwardRef((props, forwardRef) => {
+type props = {
+  message: string | boolean;
+  loadingStatus: boolean;
+  definition: boolean;
+};
+
+const ErrorMessage = (props: props) => {
   let { message, loadingStatus, definition } = props;
   let template;
 
@@ -13,6 +19,6 @@ const ErrorMessage = forwardRef((props, forwardRef) => {
   }
 
   return template;
-});
+};
 
 export default ErrorMessage;
