@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import uuid from 'react-uuid';
 import { Button, Input, Form, P } from '..';
 import { COLOR } from '../../common/constants/constants';
 import { createRandomNumbers } from '../../utils/mathUtils';
@@ -9,17 +8,17 @@ import ResultTemplate from './ResultTemplate';
 import DigitButton from '../@commons/Button/DigitButton/DigitButton';
 
 const BaseballGame = () => {
-  const [lengthOfArray, setLengthOfArray] = useState(4);
+  const [lengthOfArray, setLengthOfArray] = useState<any>(4);
   // 상태는 비동기 기억하기
-  const [state, setState] = useState({ targetNumber: createRandomNumbers(lengthOfArray), currentValue: null, tryLog: [] });
+  const [state, setState] = useState<any | object>({ targetNumber: createRandomNumbers(lengthOfArray), currentValue: null, tryLog: [] });
   // strikeCount, ballCount 배열로 보관
-  const [gameCounts, setGameCounts] = useState([]);
+  const [gameCounts, setGameCounts] = useState<any[]>([]);
   // 에러메시지 관련 상태
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState<any>(null);
 
   // refs
-  const baseballGameForm = useRef();
-  const baseballGameInput = useRef();
+  const baseballGameForm = useRef<HTMLFormElement>(null);
+  const baseballGameInput = useRef<any>(null);
 
   const initialState = {
     targetNumber: createRandomNumbers(lengthOfArray),
@@ -28,15 +27,14 @@ const BaseballGame = () => {
   };
 
   //handlers
-  const resetState = (message) => {
-    if (!alert(message)) {
-      setState(initialState);
-      setGameCounts([]);
-      setErrorMessage(null);
-    }
+  const resetState = (message: string) => {
+    alert(message);
+    setState(initialState);
+    setGameCounts([]);
+    setErrorMessage(null);
   };
 
-  const onSubmitBaseballGame = (e) => {
+  const onSubmitBaseballGame = (e: React.FormEvent) => {
     e.preventDefault();
 
     const errorMessageArray = Array.from(getErrorMessages(baseballGameInput, tryLog, lengthOfArray));
@@ -51,7 +49,7 @@ const BaseballGame = () => {
     clearInputValue(baseballGameInput);
   };
 
-  const updateInputValue = (input) => {
+  const updateInputValue = (input: any) => {
     const inputValue = input.current.value;
     const { tryLog } = state;
 
@@ -79,15 +77,15 @@ const BaseballGame = () => {
     if (tryLog.length === 10) resetState(`10회 시도에 도달하였습니다. 정답은 : ${answer} 입니다.`);
   };
 
-  const handleKeyPressEvent = (e) => {
+  const handleKeyPressEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
     return e.key === 'Enter' ? onSubmitBaseballGame(e) : undefined;
   };
 
-  const createErrorMessages = (errorMessage) => {
-    const templates = createEmptyArray(errorMessage.length);
+  const createErrorMessages = (errorMessage: []) => {
+    const templates: any[] = createEmptyArray(errorMessage.length);
 
-    errorMessage.map((template, i) => {
-      return (templates[i] = <P key={uuid()} style={{ color: COLOR.RED }} title={template} />);
+    errorMessage.map((template: any, i) => {
+      return (templates[i] = <P key={i} style={{ color: COLOR.RED }} title={template} className={''} />);
     });
 
     return templates;
@@ -95,18 +93,18 @@ const BaseballGame = () => {
 
   const createCountTemplates = () => {
     const { tryLog } = state;
-    const templates = createEmptyArray(gameCounts.length);
+    const templates: any[] = createEmptyArray(gameCounts.length);
 
     gameCounts.map((game, i) => {
       const { strikeCount, ballCount } = game;
 
-      return (templates[i] = <ResultTemplate key={uuid()} index={i} strikeCount={strikeCount} ballCount={ballCount} tryLog={tryLog} />);
+      return (templates[i] = <ResultTemplate key={i} index={i} strikeCount={strikeCount} ballCount={ballCount} tryLog={tryLog} />);
     });
 
     return templates;
   };
 
-  const updateLengthOfArray = (number) => {
+  const updateLengthOfArray = (number: number) => {
     setLengthOfArray(number);
 
     setState({
@@ -116,10 +114,10 @@ const BaseballGame = () => {
   };
 
   const buttonTemplates = () => {
-    const templates = createEmptyArray(7);
+    const templates: any[] = createEmptyArray(7);
 
     templates.map((el, i) => {
-      return (templates[i] = <DigitButton key={uuid()} digit={i + 3} updateNumber={updateLengthOfArray} />);
+      return (templates[i] = <DigitButton key={i} digit={i + 3} updateNumber={updateLengthOfArray} />);
     });
 
     return templates;
@@ -129,10 +127,10 @@ const BaseballGame = () => {
 
   return (
     <Form ref={baseballGameForm} onSubmit={onSubmitBaseballGame}>
-      {currentValue ? null : <P title={`자리수를 선택해 주세요`} />}
+      {currentValue ? null : <P title={`자리수를 선택해 주세요`} className={''} style={undefined} />}
       {currentValue ? null : buttonTemplates()}
-      <P title={`랜덤으로 제공되는 ${lengthOfArray}자리 숫자를 예측해 보세요.`} />
-      <Input ref={baseballGameInput} onKeyPressEvent={handleKeyPressEvent} />
+      <P title={`랜덤으로 제공되는 ${lengthOfArray}자리 숫자를 예측해 보세요.`} className={''} style={undefined} />
+      <Input ref={baseballGameInput} onKeyPressEvent={handleKeyPressEvent} type={''} />
       <Button type={'submit'} title={'입력'} />
       {!errorMessage ? null : createErrorMessages(errorMessage)}
       {currentValue ? createCountTemplates() : null}

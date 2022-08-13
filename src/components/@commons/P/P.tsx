@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 type props = {
   className: string;
-  style: object;
+  style: object | undefined;
   title: any;
 };
 
