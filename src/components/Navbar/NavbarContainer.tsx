@@ -21,6 +21,11 @@ const NavbarContainer = () => {
             숫자야구게임
           </Link>
         </li>
+        <li>
+          <Link to='/rockpaperscissors' style={{ color: 'green' }}>
+            가위바위보게임
+          </Link>
+        </li>
       </ul>
     </div>
   );

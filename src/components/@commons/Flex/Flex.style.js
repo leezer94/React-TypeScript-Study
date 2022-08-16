@@ -9,5 +9,6 @@ export const FlexBox = styled.div`
   flex-shrink: ${(props) => props.flexShrink};
   flex-wrap: ${(props) => props.flexWrap};
   justify-content: ${(props) => props.justifyContent};
-  ${({ css }) => css}
+  flex-direction: ${(props) => props.flexDirection};
+  ${({ css }) => css};
 `;
