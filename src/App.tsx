@@ -7,6 +7,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import BaseballGame from './components/baseballGame/BaseballGame';
 import RpcGame from './components/RpcGame/RpcGame';
+import Lotto from './Lotto/Lotto';
 
 const GlobalStyle = createGlobalStyle`
 *, *::before, *::after {
@@ -61,6 +62,7 @@ const App = () => {
         <Route path='/wordRelay' element={<WordRelay />}></Route>
         <Route path='/baseballgame' element={<BaseballGame />}></Route>
         <Route path='/rockpaperscissors' element={<RpcGame />}></Route>
+        <Route path='/lotto' element={<Lotto />}></Route>
       </Routes>
     </div>
   );

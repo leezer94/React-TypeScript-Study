@@ -26,6 +26,11 @@ const NavbarContainer = () => {
             가위바위보게임
           </Link>
         </li>
+        <li>
+          <Link to='/lotto' style={{ color: 'green' }}>
+            로또생성기
+          </Link>
+        </li>
       </ul>
     </div>
   );
