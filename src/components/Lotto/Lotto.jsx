@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Flex } from '..';
 import LottoButton from '../@commons/Button/LottoButton/LottoButton';
-import LottoGeneratorContainer from '../@commons/Button/LottoButton/LottoGenerator';
+import LottoGeneratorContainer from './LottoGenerator';
 
 const Lotto = () => {
   const [isClicked, setIsClicked] = useState(false);

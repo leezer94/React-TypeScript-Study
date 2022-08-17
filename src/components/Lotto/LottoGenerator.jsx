@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { createRandomNumbers } from '../../../../utils/mathUtils';
-import { Flex } from '../../Flex/Flex';
-import { P } from '../../P/P';
-import LottoButton from './LottoButton';
+import { createRandomNumbers } from '../../utils/mathUtils';
+import { Flex } from '../@commons/Flex/Flex';
+import { P } from '../@commons/P/P';
+import LottoButton from '../@commons/Button/LottoButton/LottoButton';
 
 const LottoGeneratorContainer = (props) => {
   const [state, setState] = useState({ lottoNumbers: Array.from(createRandomNumbers(7)) });
