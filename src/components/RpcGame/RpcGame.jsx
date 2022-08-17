@@ -5,15 +5,15 @@ import RpsResultContainer from './RcpResultContainer';
 
 const RpcGame = () => {
   // 상태로 관리해야 할 것들.
-  const [state, setState] = useState({ currentMove: '가위' });
+  const [state, setState] = useState({ currentMove: '가위', gameResult: '', computerMove: '' });
 
-  const { currentMove } = state;
+  const { gameResult } = state;
 
   return (
     <>
       <Flex flexDirection='column'>
-        <RpsDisplayContainer currentMove={currentMove} handleCurrentMove={setState} />
-        <RpsResultContainer />
+        <RpsDisplayContainer state={state} handleState={setState} />
+        <RpsResultContainer gameResult={gameResult} />
       </Flex>
     </>
   );

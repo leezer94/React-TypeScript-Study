@@ -7,7 +7,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import BaseballGame from './components/baseballGame/BaseballGame';
 import RpcGame from './components/RpcGame/RpcGame';
-import Lotto from './Lotto/Lotto';
+import Lotto from './components/Lotto/Lotto';
 
 const GlobalStyle = createGlobalStyle`
 *, *::before, *::after {
