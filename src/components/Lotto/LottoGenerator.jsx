@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Flex } from '../@commons/Flex/Flex';
-import { P } from '../@commons/P/P';
+import { Flex, P } from '..';
 import LottoButton from '../@commons/Button/LottoButton/LottoButton';
 
 const LottoGeneratorContainer = (props) => {

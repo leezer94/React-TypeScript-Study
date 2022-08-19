@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Form } from '../@commons/Form/Form';
-import { Button } from '../@commons/Button/Button';
-import { P } from '../@commons/P/P';
-import { generateRandomNumber } from '../../utils/mathUtils';
+import { Form, Button, P } from '..';
 
 const RpsDisplayContainer = (props) => {
-  const { state, handleState } = props;
-  const { currentMove, computerMove } = state;
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { state, handleState, setScore } = props;
+  let { currentMove } = state;
+  const [isPlaying, setIsPlaying] = useState(true);
+
   const form = useRef();
+
+  const images = ['✌️', '✊🏻', '🖐🏿'];
+  const [image, setImage] = useState(0);
+  const interval = useRef();
 
   const printCurrentMove = () => {
     let currentEmoji;
@@ -24,17 +26,26 @@ const RpsDisplayContainer = (props) => {
     return currentEmoji;
   };
 
-  const updateGameResult = () => {
-    handleState({
-      ...state,
-      gameResult: handleGameResult(),
-    });
+  const handleHandImage = () => {
+    if (image === images.length - 1) {
+      setImage(0);
+    } else {
+      setImage(image + 1);
+    }
   };
 
-  const handleGameResult = () => {
+  useEffect(() => {
+    interval.current = setInterval(handleHandImage, 500);
+
+    return () => {
+      clearInterval(interval.current);
+    };
+  }, [image]);
+
+  const handleGameResult = (currentMove, computerMove) => {
     let result = '';
 
-    if (computerMove === '가위') {
+    if (computerMove === images[0]) {
       if (currentMove === '바위') {
         result = '컴퓨터 승리';
       } else if (currentMove === '가위') {
@@ -42,7 +53,7 @@ const RpsDisplayContainer = (props) => {
       } else if (currentMove === '보') {
         result = '유저 승리';
       }
-    } else if (computerMove === '바위') {
+    } else if (computerMove === images[1]) {
       if (currentMove === '바위') {
         result = '비겼습니다.';
       } else if (currentMove === '가위') {
@@ -50,7 +61,7 @@ const RpsDisplayContainer = (props) => {
       } else if (currentMove === '보') {
         result = '유저 승리';
       }
-    } else if (computerMove === '보') {
+    } else if (computerMove === images[2]) {
       if (currentMove === '바위') {
         result = '컴퓨터 승리';
       } else if (currentMove === '가위') {
@@ -60,36 +71,27 @@ const RpsDisplayContainer = (props) => {
       }
     }
 
+    if (result === '컴퓨터 승리') {
+      setScore((score) => score - 10);
+    } else if (result === '유저 승리') {
+      setScore((score) => score + 10);
+    }
+
     return result;
   };
 
   const onClickHandButton = (e) => {
+    clearInterval(interval.current);
+    setIsPlaying(!isPlaying);
+
     handleState({
       ...state,
       currentMove: e.target.textContent,
+      computerMove: images[image],
+      gameResult: handleGameResult(e.target.textContent, images[image]),
     });
 
-    setIsPlaying(!isPlaying);
-  };
-
-  const handlePrintRandomHand = () => {
-    const array = ['✌️', '✊🏻', '🖐🏿'];
-
-    let index = 0;
-
-    function count(start, end) {
-      if (start === end) {
-        start = 0;
-      }
-
-      start += 1;
-
-      return start;
-    }
-
-    console.log(array[count(0, 3)]);
-
-    if (index === array.length) index = 0;
+    interval.current = setInterval(handleHandImage, 500);
   };
 
   const createRPSButtons = () => {
@@ -102,10 +104,11 @@ const RpsDisplayContainer = (props) => {
 
   return (
     <Form ref={form} onSubmit={(e) => e.preventDefault()}>
-      <P title={printCurrentMove()} />
+      <P title={'Computer'} style={{ color: 'blue', fontWeight: 600 }} />
+      <P title={images[image]} style={{ fontSize: 80, margin: 10, padding: 0 }} />
       {createRPSButtons()}
-      <P title={printCurrentMove()} style={{ fontSize: 80, margin: 10, padding: 0 }} />
-      {console.log(isPlaying)}
+      <P title={'User'} style={{ color: 'red', fontWeight: 600 }} />
+      <P title={!currentMove ? '✌️' : printCurrentMove()} style={{ fontSize: 80, margin: 10, padding: 0 }} />
     </Form>
   );
 };

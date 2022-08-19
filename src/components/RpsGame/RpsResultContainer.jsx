@@ -1,11 +1,16 @@
 import React from 'react';
-import { Flex } from '../@commons/Flex/Flex';
+import { Flex, P } from '..';
 
-const RpsResultContainer = () => {
+const RpsResultContainer = (props) => {
+  let { gameResult, user, computer, score } = props;
+
+  !user ? (user = '') : user === '바위' ? (user = '✊🏻') : user === '가위' ? (user = '✌️') : (user = '🖐🏿');
+
   return (
     <Flex flexDirection='column'>
-      <p>결과 메시지</p>
-      <p>현재점수 : 10 점</p>
+      <P title={`USER : ${!user ? '현재 유저 손' : user}, COMPUTER : ${!computer ? '현재 컴퓨터 손' : computer}`} />
+      <P title={gameResult} style={{ color: 'red', fontSize: 20 }} />
+      <p>현재점수 : {score} 점</p>
     </Flex>
   );
 };
