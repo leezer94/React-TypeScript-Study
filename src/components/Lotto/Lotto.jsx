@@ -14,7 +14,7 @@ const Lotto = () => {
     <>
       <Flex>
         {!isClicked ? (
-          <Flex style={{ width: 10 }}>
+          <Flex>
             <LottoButton title={'로또 번호 생성하기'} onClickButton={handleClickLottoButton}></LottoButton>
           </Flex>
         ) : (
