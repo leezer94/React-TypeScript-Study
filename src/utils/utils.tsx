@@ -5,7 +5,6 @@ export const getRightEqualSignLetter = (number: number) => {
   return neunNums.includes(number) ? equalSigns[0] : equalSigns[1];
 };
 
-// type needs to be fixed
 export const clearInputValue = (...inputs: any) => {
   inputs.map((input: any) => (input.current.value = ''));
 };

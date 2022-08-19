@@ -1,38 +1,46 @@
-import React, { useState } from 'react';
-import { createRandomNumbers } from '../../utils/mathUtils';
+import React, { useEffect, useRef, useState } from 'react';
 import { Flex } from '../@commons/Flex/Flex';
 import { P } from '../@commons/P/P';
 import LottoButton from '../@commons/Button/LottoButton/LottoButton';
 
 const LottoGeneratorContainer = (props) => {
-  const [state, setState] = useState({ lottoNumbers: Array.from(createRandomNumbers(7)) });
-  const { onClickGoBackButton } = props;
+  const { onClickGoBackButton, createLottoNumbers } = props;
 
-  const { lottoNumbers } = state;
+  // when button is clicked 7 lottoNumbers need to be rendered on the page
+  const [lottoNumbers, setLottoNumbers] = useState(createLottoNumbers);
+  const [winningNumbers, setWinningNumbers] = useState([]);
+  const timeOuts = useRef([]);
 
-  const generateLottoNumbersEverySecond = (delay) => {
-    let index = 0;
+  useEffect(() => {
+    lottoNumbers.map((lottoNumber, i) => (timeOuts.current[i] = setTimeout(() => setWinningNumbers((prev) => [...prev, lottoNumber]), (i + 1) * 1000)));
 
-    const interval = setInterval(() => {
-      if (index === lottoNumbers.length) {
-        clearInterval(interval);
-      } else {
-        return <P title={lottoNumbers[index++]} />;
+    return () => timeOuts.current.map((item) => clearTimeout(item));
+  }, [timeOuts.current]);
+
+  const createLottoElement = () =>
+    winningNumbers.map((el, i) => {
+      if (String(el).length === 1) el = '0' + String(el);
+
+      if (i === 6) {
+        return (
+          <Flex key={i} flexDirection='row'>
+            <P title={'보너스'} style={{ paddingRight: 30, color: 'red' }} />
+            <P title={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />
+          </Flex>
+        );
       }
-    }, delay);
-  };
-
-  const createLottoTemplates = () => {
-    generateLottoNumbersEverySecond(1000);
-  };
+      return <P key={i} title={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />;
+    });
 
   return (
     <Flex flexDirection='column'>
       <div>
         <p>로또 당첨번호</p>
-        {createLottoTemplates()}
+        <Flex>{createLottoElement()}</Flex>
       </div>
-      <LottoButton title={'처음으로 돌아가기'} onClickButton={onClickGoBackButton} style={{ color: 'brown' }}></LottoButton>
+      <Flex>
+        <LottoButton title={'처음으로 돌아가기'} onClickButton={onClickGoBackButton} style={{ color: 'brown' }}></LottoButton>
+      </Flex>
     </Flex>
   );
 };

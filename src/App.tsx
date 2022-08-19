@@ -6,7 +6,7 @@ import WordRelay from './components/word-relay/word-relay';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import BaseballGame from './components/baseballGame/BaseballGame';
-import RpcGame from './components/RpcGame/RpcGame';
+import RpcGame from './components/RpsGame/RpsGame';
 import Lotto from './components/Lotto/Lotto';
 
 const GlobalStyle = createGlobalStyle`

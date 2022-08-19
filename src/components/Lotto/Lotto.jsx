@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { createRandomNumbers } from '../../utils/mathUtils';
 import { Flex } from '..';
 import LottoButton from '../@commons/Button/LottoButton/LottoButton';
 import LottoGeneratorContainer from './LottoGenerator';
 
 const Lotto = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const createLottoNumbers = useMemo(() => Array.from(createRandomNumbers(7, 1, 45)), []);
 
   const handleClickLottoButton = () => setIsClicked(!isClicked);
 
@@ -12,9 +14,11 @@ const Lotto = () => {
     <>
       <Flex>
         {!isClicked ? (
-          <LottoButton title={'로또 번호 생성하기'} onClickButton={handleClickLottoButton}></LottoButton>
+          <Flex style={{ width: 10 }}>
+            <LottoButton title={'로또 번호 생성하기'} onClickButton={handleClickLottoButton}></LottoButton>
+          </Flex>
         ) : (
-          <LottoGeneratorContainer onClickGoBackButton={handleClickLottoButton} />
+          <LottoGeneratorContainer createLottoNumbers={createLottoNumbers} onClickGoBackButton={handleClickLottoButton} />
         )}
       </Flex>
     </>

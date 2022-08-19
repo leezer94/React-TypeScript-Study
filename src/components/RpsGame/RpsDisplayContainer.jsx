@@ -24,6 +24,13 @@ const RpsDisplayContainer = (props) => {
     return currentEmoji;
   };
 
+  const updateGameResult = () => {
+    handleState({
+      ...state,
+      gameResult: handleGameResult(),
+    });
+  };
+
   const handleGameResult = () => {
     let result = '';
 
@@ -53,10 +60,7 @@ const RpsDisplayContainer = (props) => {
       }
     }
 
-    handleState({
-      ...state,
-      gameResult: result,
-    });
+    return result;
   };
 
   const onClickHandButton = (e) => {
@@ -65,7 +69,7 @@ const RpsDisplayContainer = (props) => {
       currentMove: e.target.textContent,
     });
 
-    setIsPlaying((isPlaying) => (isPlaying = true));
+    setIsPlaying(!isPlaying);
   };
 
   const handlePrintRandomHand = () => {
@@ -88,25 +92,6 @@ const RpsDisplayContainer = (props) => {
     if (index === array.length) index = 0;
   };
 
-  const useInterval = (callback, delay) => {
-    const savedCallback = useRef(); // 최근에 들어온 callback을 저장할 ref를 하나 만든다.
-
-    useEffect(() => {
-      savedCallback.current = callback; // callback이 바뀔 때마다 ref를 업데이트 해준다.
-    }, [callback]);
-
-    useEffect(() => {
-      const tick = () => {
-        savedCallback.current(); // tick이 실행되면 callback 함수를 실행시킨다.
-      };
-      if (delay !== null) {
-        // 만약 delay가 null이 아니라면
-        let id = setInterval(tick, delay); // delay에 맞추어 interval을 새로 실행시킨다.
-        return () => clearInterval(id); // unmount될 때 clearInterval을 해준다.
-      }
-    }, [delay]); // delay가 바뀔 때마다 새로 실행된다.
-  };
-
   const createRPSButtons = () => {
     const movementArray = ['가위', '바위', '보'];
 
@@ -120,7 +105,6 @@ const RpsDisplayContainer = (props) => {
       <P title={printCurrentMove()} />
       {createRPSButtons()}
       <P title={printCurrentMove()} style={{ fontSize: 80, margin: 10, padding: 0 }} />
-      {useInterval(() => handlePrintRandomHand(), 1000)}
       {console.log(isPlaying)}
     </Form>
   );
