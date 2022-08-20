@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex } from '../@commons/Flex/Flex';
+import { Flex } from '../../components';
 import RpsDisplayContainer from './RpsDisplayContainer';
 import RpsResultContainer from './RpsResultContainer';
 

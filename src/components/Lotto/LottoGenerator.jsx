@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Flex, P } from '..';
 import LottoButton from '../@commons/Button/LottoButton/LottoButton';
 
@@ -8,13 +8,12 @@ const LottoGeneratorContainer = (props) => {
   // when button is clicked 7 lottoNumbers need to be rendered on the page
   const [lottoNumbers, setLottoNumbers] = useState(createLottoNumbers);
   const [winningNumbers, setWinningNumbers] = useState([]);
-  const timeOuts = useRef([]);
 
   useEffect(() => {
-    lottoNumbers.map((lottoNumber, i) => (timeOuts.current[i] = setTimeout(() => setWinningNumbers((prev) => [...prev, lottoNumber]), (i + 1) * 1000)));
+    lottoNumbers.map((lottoNumber, i) => (lottoNumbers[i] = setTimeout(() => setWinningNumbers((prev) => [...prev, lottoNumber]), (i + 1) * 1000)));
 
-    return () => timeOuts.current.map((item) => clearTimeout(item));
-  }, [timeOuts.current]);
+    return () => lottoNumbers.map((item) => clearTimeout(item));
+  }, [lottoNumbers]);
 
   const createLottoElement = () =>
     winningNumbers.map((el, i) => {

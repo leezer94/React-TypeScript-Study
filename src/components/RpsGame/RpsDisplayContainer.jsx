@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Form, Button, P } from '..';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Form, Button, P } from '../../components';
 
 const RpsDisplayContainer = (props) => {
   const { state, handleState, setScore } = props;
   let { currentMove } = state;
-  const [isPlaying, setIsPlaying] = useState(true);
-
-  const form = useRef();
 
   const images = ['✌️', '✊🏻', '🖐🏿'];
   const [image, setImage] = useState(0);
+
+  const [isPlaying, setIsPlaying] = useState(true);
+
   const interval = useRef();
 
   const printCurrentMove = () => {
@@ -26,21 +26,21 @@ const RpsDisplayContainer = (props) => {
     return currentEmoji;
   };
 
-  const handleHandImage = () => {
+  const handleHandImage = useCallback(() => {
     if (image === images.length - 1) {
       setImage(0);
     } else {
       setImage(image + 1);
     }
-  };
+  }, [image, images.length]);
 
   useEffect(() => {
-    interval.current = setInterval(handleHandImage, 500);
+    interval.current = setInterval(handleHandImage, 100);
 
     return () => {
       clearInterval(interval.current);
     };
-  }, [image]);
+  }, [handleHandImage]);
 
   const handleGameResult = (currentMove, computerMove) => {
     let result = '';
@@ -103,7 +103,7 @@ const RpsDisplayContainer = (props) => {
   };
 
   return (
-    <Form ref={form} onSubmit={(e) => e.preventDefault()}>
+    <Form onSubmit={(e) => e.preventDefault()}>
       <P title={'Computer'} style={{ color: 'blue', fontWeight: 600 }} />
       <P title={images[image]} style={{ fontSize: 80, margin: 10, padding: 0 }} />
       {createRPSButtons()}
