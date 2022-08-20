@@ -1,6 +1,6 @@
 import React from 'react';
-import DigitButton from '../@commons/Button/DigitButton/DigitButton';
-import { P } from '..';
+import DigitButton from '../../components/@commons/Button/DigitButton/DigitButton';
+import { P } from '../../components';
 import { createEmptyArray } from '../../utils/utils';
 
 type props = {

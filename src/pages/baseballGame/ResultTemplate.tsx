@@ -1,5 +1,5 @@
 import React from 'react';
-import { P } from '..';
+import { P } from '../../components';
 
 type props = {
   index: number;

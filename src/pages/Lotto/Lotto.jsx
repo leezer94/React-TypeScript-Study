@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { createRandomNumbers } from '../../utils/mathUtils';
-import { Flex } from '..';
-import LottoButton from '../@commons/Button/LottoButton/LottoButton';
+import { Flex } from '../../components';
+import LottoButton from '../../components/@commons/Button/LottoButton/LottoButton';
 import LottoGeneratorContainer from './LottoGenerator';
 
 const Lotto = () => {

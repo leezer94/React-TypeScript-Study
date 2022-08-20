@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { Button, Input, Form, P } from '..';
+import { Button, Input, Form, P } from '../../components';
 import { COLOR } from '../../common/constants/constants';
 import { createRandomNumbers } from '../../utils/mathUtils';
 import { clearInputValue, compareTwoArrays, createEmptyArray } from '../../utils/utils';
 import { getErrorMessages } from '../../utils/validator';
 import ResultTemplate from './ResultTemplate';
-import DigitButton from '../@commons/Button/DigitButton/DigitButton';
+import DigitButton from '../../components/@commons/Button/DigitButton/DigitButton';
 
 const BaseballGame = () => {
   const [lengthOfArray, setLengthOfArray] = useState<any>(4);

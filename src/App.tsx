@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import MultiplicationTable from './components/multiplication-table/multiplication-table';
-import WordRelay from './components/word-relay/word-relay';
+import MultiplicationTable from './pages/multiplication-table/multiplication-table';
+import WordRelay from './pages/word-relay/word-relay';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import BaseballGame from './components/baseballGame/BaseballGame';
-import RpcGame from './components/RpsGame/RpsGame';
-import Lotto from './components/Lotto/Lotto';
+import BaseballGame from './pages/baseballGame/BaseballGame';
+import RpcGame from './pages/RpsGame/RpsGame';
+import Lotto from './pages/Lotto/Lotto';
 
 const GlobalStyle = createGlobalStyle`
 *, *::before, *::after {

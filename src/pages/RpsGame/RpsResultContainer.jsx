@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, P } from '..';
+import { Flex, P } from '../../components';
 
 const RpsResultContainer = (props) => {
   let { gameResult, user, computer, score } = props;

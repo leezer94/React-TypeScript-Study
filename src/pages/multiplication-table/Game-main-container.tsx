@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Form, P, Input, Button } from '..';
+import { Form, P, Input, Button } from '../../components';
 import { CLASSNAME, COLOR } from '../../common/constants/constants';
 import { getRightEqualSignLetter, clearInputValue } from '../../utils/utils';
 import { isValidNumberTypeInput } from '../../utils/validator';

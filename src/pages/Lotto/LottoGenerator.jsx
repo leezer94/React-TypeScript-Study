@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Flex, P } from '..';
-import LottoButton from '../@commons/Button/LottoButton/LottoButton';
+import { Flex, P } from '../../components';
+import LottoButton from '../../components/@commons/Button/LottoButton/LottoButton';
 
 const LottoGeneratorContainer = (props) => {
   const { onClickGoBackButton, createLottoNumbers } = props;

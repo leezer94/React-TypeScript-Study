@@ -4,7 +4,7 @@ import { isValidInputWord } from '../../utils/validator';
 import { fetch우리말api } from '../../common/api';
 import { CLASSNAME, COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants';
 import { useRef, useState } from 'react';
-import { Button, Input, Form } from '..';
+import { Button, Input, Form } from '../../components';
 import React from 'react';
 
 type setState = any;
