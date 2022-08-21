@@ -1,13 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import MultiplicationTable from './pages/multiplication-table/multiplication-table';
-import WordRelay from './pages/word-relay/word-relay';
-import './App.css';
+import { Tictactoe, Lotto, RpsGame, WordRelay, MultiplicationTable, BaseballGame } from './pages';
 import Navbar from './components/Navbar/Navbar';
-import BaseballGame from './pages/baseballGame/BaseballGame';
-import RpcGame from './pages/RpsGame/RpsGame';
-import Lotto from './pages/Lotto/Lotto';
+import './App.css';
 
 const GlobalStyle = createGlobalStyle`
 *, *::before, *::after {
@@ -61,8 +57,9 @@ const App = () => {
         <Route path='/multiplication' element={<MultiplicationTable />}></Route>
         <Route path='/wordRelay' element={<WordRelay />}></Route>
         <Route path='/baseballgame' element={<BaseballGame />}></Route>
-        <Route path='/rockpaperscissors' element={<RpcGame />}></Route>
+        <Route path='/rockpaperscissors' element={<RpsGame />}></Route>
         <Route path='/lotto' element={<Lotto />}></Route>
+        <Route path='/tictactoe' element={<Tictactoe />}></Route>
       </Routes>
     </div>
   );

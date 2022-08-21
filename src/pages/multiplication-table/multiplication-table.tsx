@@ -10,7 +10,7 @@ interface stateProps {
   sum: number;
 }
 
-const MultiplicationTable = () => {
+export const MultiplicationTable = () => {
   const [state, setState] = useState<stateProps>({ firstNumber: 9, secondNumber: 2, sum: 9 * 2 });
   const [evaluation, setEvaluation] = useState(true);
 
@@ -37,5 +37,3 @@ const MultiplicationTable = () => {
     </div>
   );
 };
-
-export default MultiplicationTable;

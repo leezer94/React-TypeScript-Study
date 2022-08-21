@@ -31,6 +31,11 @@ const NavbarContainer = () => {
             로또생성기
           </Link>
         </li>
+        <li>
+          <Link to='/tictactoe' style={{ color: 'purple' }}>
+            틱택토
+          </Link>
+        </li>
       </ul>
     </div>
   );

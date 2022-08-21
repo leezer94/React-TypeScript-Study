@@ -4,7 +4,7 @@ import { Flex, Modal } from '../../components';
 import LottoButton from '../../components/@commons/Button/LottoButton/LottoButton';
 import LottoGeneratorContainer from './LottoGenerator';
 
-const Lotto = () => {
+export const Lotto = () => {
   const [isClicked, setIsClicked] = useState(false);
   const createLottoNumbers = useMemo(() => Array.from(createRandomNumbers(7, 1, 45)), []);
 
@@ -33,5 +33,3 @@ const Lotto = () => {
     </>
   );
 };
-
-export default Lotto;

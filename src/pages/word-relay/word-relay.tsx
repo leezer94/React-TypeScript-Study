@@ -1,8 +1,6 @@
 import React from 'react';
 import CurrentGame from './currentGame';
 
-const WordRelay = () => {
+export const WordRelay = () => {
   return <CurrentGame />;
 };
-
-export default WordRelay;

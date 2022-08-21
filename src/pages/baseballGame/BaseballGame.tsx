@@ -7,7 +7,7 @@ import { getErrorMessages } from '../../utils/validator';
 import ResultTemplate from './ResultTemplate';
 import DigitButton from '../../components/@commons/Button/DigitButton/DigitButton';
 
-const BaseballGame = () => {
+export const BaseballGame = () => {
   const [lengthOfArray, setLengthOfArray] = useState<any>(4);
   // 상태는 비동기 기억하기
   const [state, setState] = useState<any | object>({ targetNumber: createRandomNumbers(lengthOfArray), currentValue: null, tryLog: [] });
@@ -138,5 +138,3 @@ const BaseballGame = () => {
     </Form>
   );
 };
-
-export default BaseballGame;
