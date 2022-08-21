@@ -1,17 +1,17 @@
 import React, { forwardRef } from 'react';
 
 type props = {
-  className: string;
+  className: string | undefined;
   style: object | undefined;
-  title: any;
+  content: any;
 };
 
 export const P = forwardRef<HTMLParagraphElement, props>((props, forwardRef) => {
-  const { className, style, title } = props;
+  const { className, style, content } = props;
 
   return (
-    <p title={title} className={className} style={style} ref={forwardRef}>
-      {title}
+    <p className={className} style={style} ref={forwardRef}>
+      {content}
     </p>
   );
 });

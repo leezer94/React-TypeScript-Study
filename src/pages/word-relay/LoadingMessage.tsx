@@ -1,4 +1,5 @@
 import React from 'react';
+import { P } from '../../components';
 
 type props = {
   className: string;
@@ -8,7 +9,7 @@ type props = {
 const LoadingMessage = (props: props) => {
   const { className, message } = props;
 
-  return <p className={className}>{message}</p>;
+  return <P className={className} content={message} style={undefined} />;
 };
 
 export default LoadingMessage;

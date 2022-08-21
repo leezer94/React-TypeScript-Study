@@ -85,7 +85,7 @@ const BaseballGame = () => {
     const templates: any[] = createEmptyArray(errorMessage.length);
 
     errorMessage.map((template: any, i) => {
-      return (templates[i] = <P key={i} style={{ color: COLOR.RED }} title={template} className={''} />);
+      return (templates[i] = <P key={i} style={{ color: COLOR.RED }} content={template} className={''} />);
     });
 
     return templates;
@@ -127,11 +127,11 @@ const BaseballGame = () => {
 
   return (
     <Form ref={baseballGameForm} onSubmit={onSubmitBaseballGame}>
-      {currentValue ? null : <P title={`자리수를 선택해 주세요`} className={''} style={undefined} />}
+      {currentValue ? null : <P content={`자리수를 선택해 주세요`} className={''} style={undefined} />}
       {currentValue ? null : buttonTemplates()}
-      <P title={`랜덤으로 제공되는 ${lengthOfArray}자리 숫자를 예측해 보세요.`} className={''} style={undefined} />
+      <P content={`랜덤으로 제공되는 ${lengthOfArray}자리 숫자를 예측해 보세요.`} className={''} style={undefined} />
       <Input ref={baseballGameInput} onKeyPressEvent={handleKeyPressEvent} type={''} />
-      <Button type={'submit'} title={'입력'} />
+      <Button type={'submit'} content={'입력'} />
       {!errorMessage ? null : createErrorMessages(errorMessage)}
       {currentValue ? createCountTemplates() : null}
       {currentValue ? handleResetGame() : null}

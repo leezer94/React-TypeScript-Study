@@ -98,17 +98,17 @@ const RpsDisplayContainer = (props) => {
     const movementArray = ['가위', '바위', '보'];
 
     return movementArray.map((el, i) => {
-      return <Button type='submit' key={i} title={el} onClickEvent={onClickHandButton} />;
+      return <Button type='submit' key={i} content={el} onClickEvent={onClickHandButton} />;
     });
   };
 
   return (
     <Form onSubmit={(e) => e.preventDefault()}>
-      <P title={'Computer'} style={{ color: 'blue', fontWeight: 600 }} />
-      <P title={images[image]} style={{ fontSize: 80, margin: 10, padding: 0 }} />
+      <P content={'Computer'} style={{ color: 'blue', fontWeight: 600 }} />
+      <P content={images[image]} style={{ fontSize: 80, margin: 10, padding: 0 }} />
       {createRPSButtons()}
-      <P title={'User'} style={{ color: 'red', fontWeight: 600 }} />
-      <P title={!currentMove ? '✌️' : printCurrentMove()} style={{ fontSize: 80, margin: 10, padding: 0 }} />
+      <P content={'User'} style={{ color: 'red', fontWeight: 600 }} />
+      <P content={!currentMove ? '✌️' : printCurrentMove()} style={{ fontSize: 80, margin: 10, padding: 0 }} />
     </Form>
   );
 };

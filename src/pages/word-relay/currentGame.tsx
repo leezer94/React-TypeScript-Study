@@ -3,8 +3,8 @@ import { clearInputValue } from '../../utils/utils';
 import { isValidInputWord } from '../../utils/validator';
 import { fetch우리말api } from '../../common/api';
 import { CLASSNAME, COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants';
-import { useRef, useState } from 'react';
-import { Button, Input, Form } from '../../components';
+import { useCallback, useRef, useState } from 'react';
+import { Button, Input, Form, P } from '../../components';
 import React from 'react';
 
 type setState = any;
@@ -61,10 +61,10 @@ const CurrentGame = () => {
     }
   };
 
+  useCallback(handleSubmitButton, [state]);
+
   const onClickSubmitButton = (currentWord: string) => {
     const errorMessageHandler: string | undefined | null = handleErrorMessage(wordInput.current.value, currentWord);
-
-    // updateErrorMessage(errorMessageHandler);
 
     if (isValidInputWord(errorMessageHandler)) {
       handleSubmitButton(wordInput.current.value);
@@ -89,12 +89,12 @@ const CurrentGame = () => {
 
   return (
     <Form ref={wordRelayForm} onSubmit={handleSubmitWord}>
-      <p className='current-word'>{currentWord}</p>
+      <P className='current-word' content={currentWord} style={undefined}></P>
       <Input ref={wordInput} type='text' onKeyPressEvent={handleKeyPressEvent} />
-      <Button type={'submit'} title={'입력'} />
-      <p className={loading ? undefined : CLASSNAME.HIDE}>사전 검색중...</p>
-      <p className={loading ? CLASSNAME.HIDE : undefined}>{definition ? definition : ERROR_MESSAGE.EMPTY_INPUT}</p>
-      <p style={{ color: COLOR.RED }} ref={errorMessage}></p>
+      <Button type={'submit'} content={'입력'} />
+      <P className={loading ? undefined : CLASSNAME.HIDE} content={'사전 검색중...'} style={undefined}></P>
+      <P className={loading ? CLASSNAME.HIDE : undefined} content={definition ? definition : ERROR_MESSAGE.EMPTY_INPUT} style={undefined}></P>
+      <P style={{ color: COLOR.RED }} ref={errorMessage} content={undefined} className={undefined}></P>
     </Form>
   );
 };

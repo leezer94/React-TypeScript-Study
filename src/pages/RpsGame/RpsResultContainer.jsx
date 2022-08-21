@@ -8,8 +8,8 @@ const RpsResultContainer = (props) => {
 
   return (
     <Flex flexDirection='column'>
-      <P title={`USER : ${!user ? '현재 유저 손' : user}, COMPUTER : ${!computer ? '현재 컴퓨터 손' : computer}`} />
-      <P title={gameResult} style={{ color: 'red', fontSize: 20 }} />
+      <P content={`USER : ${!user ? '현재 유저 손' : user}, COMPUTER : ${!computer ? '현재 컴퓨터 손' : computer}`} />
+      <P content={gameResult} style={{ color: 'red', fontSize: 20 }} />
       <p>현재점수 : {score} 점</p>
     </Flex>
   );

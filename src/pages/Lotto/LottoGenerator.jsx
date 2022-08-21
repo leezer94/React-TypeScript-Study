@@ -22,12 +22,12 @@ const LottoGeneratorContainer = (props) => {
       if (i === 6) {
         return (
           <Flex key={i} flexDirection='row'>
-            <P title={'보너스'} style={{ paddingRight: 30, color: 'red' }} />
-            <P title={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />
+            <P content={'보너스'} style={{ paddingRight: 30, color: 'red' }} />
+            <P content={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />
           </Flex>
         );
       }
-      return <P key={i} title={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />;
+      return <P key={i} content={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />;
     });
 
   return (
@@ -37,7 +37,7 @@ const LottoGeneratorContainer = (props) => {
         <Flex>{createLottoElement()}</Flex>
       </div>
       <Flex>
-        <LottoButton title={'처음으로 돌아가기'} onClickButton={onClickGoBackButton} style={{ color: 'brown' }}></LottoButton>
+        <LottoButton content={'처음으로 돌아가기'} onClickButton={onClickGoBackButton} style={{ color: 'brown' }}></LottoButton>
       </Flex>
     </Flex>
   );

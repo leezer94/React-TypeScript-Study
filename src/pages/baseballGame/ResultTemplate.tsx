@@ -18,9 +18,9 @@ const ResultTemplate = (props: props) => {
 
   return (
     <div style={styleObj}>
-      <P title={`${index + 1}차 시도 : ${tryLog[index]}`} className={''} style={undefined} />
-      <P title={`strikeCount : ${strikeCount}`} className={''} style={undefined} />
-      <P title={`ballCount : ${ballCount}`} className={''} style={undefined} />
+      <P content={`${index + 1}차 시도 : ${tryLog[index]}`} className={''} style={undefined} />
+      <P content={`strikeCount : ${strikeCount}`} className={''} style={undefined} />
+      <P content={`ballCount : ${ballCount}`} className={''} style={undefined} />
     </div>
   );
 };

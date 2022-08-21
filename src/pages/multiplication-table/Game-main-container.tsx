@@ -54,11 +54,11 @@ const MultiplicationMainContainer = (props: props) => {
   return (
     <>
       <Form ref={multiplicationForm} onSubmit={handleNumberSubmit}>
-        <P title={`${firstNumber} 곱하기 ${secondNumber} ${getRightEqualSignLetter(secondNumber)}?`} className={''} style={{}}></P>
+        <P content={`${firstNumber} 곱하기 ${secondNumber} ${getRightEqualSignLetter(secondNumber)}?`} className={''} style={{}}></P>
         <Input type={'text'} ref={multiplicationInput} onKeyPressEvent={handleKeyPressEvent} />
-        <Button type={'submit'} title={'입력'}></Button>
-        <P className={!evaluation ? '' : CLASSNAME.HIDE} ref={incorrectMessage} style={{ color: COLOR.RED }} title={`정답이 아닙니다.`} />
-        <P className={!isNumberType ? '' : CLASSNAME.HIDE} ref={notANumberMessage} style={{ color: COLOR.RED }} title={'숫자만 입력이 가능합니다.'} />
+        <Button type={'submit'} content={'입력'}></Button>
+        <P className={!evaluation ? '' : CLASSNAME.HIDE} ref={incorrectMessage} style={{ color: COLOR.RED }} content={`정답이 아닙니다.`} />
+        <P className={!isNumberType ? '' : CLASSNAME.HIDE} ref={notANumberMessage} style={{ color: COLOR.RED }} content={'숫자만 입력이 가능합니다.'} />
       </Form>
     </>
   );

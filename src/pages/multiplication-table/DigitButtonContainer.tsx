@@ -39,10 +39,10 @@ const DigitButtonContainer = ({ state, setState }: props) => {
   };
 
   return (
-    <div>
-      <P title={'구구단 몇단?'} className={''} style={{}} />
+    <>
+      <P content={'구구단 몇단?'} className={''} style={{}} />
       {buttonTemplates()}
-    </div>
+    </>
   );
 };
 

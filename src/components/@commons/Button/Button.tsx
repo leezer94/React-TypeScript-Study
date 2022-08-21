@@ -2,16 +2,16 @@ import React from 'react';
 
 type props = {
   type: 'submit';
-  title: string;
+  content: string;
   onClickEvent?: () => void;
 };
 
 export const Button = (props: props) => {
-  const { type, title, onClickEvent } = props;
+  const { type, content, onClickEvent } = props;
 
   return (
     <button type={type} onClick={onClickEvent}>
-      {title}
+      {content}
     </button>
   );
 };
