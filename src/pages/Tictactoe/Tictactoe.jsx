@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Modal } from '../../components';
+import { Flex, Modal } from '../../components';
 import { StyledButton } from '../../components';
 import { createEmptyArray } from '../../utils/utils';
-import './tictactoe.css';
+import { Cell } from './Cell';
+import { TicTacToeGameResult } from './GameResult';
 
 export const Tictactoe = () => {
   //  Modal related
@@ -11,10 +12,10 @@ export const Tictactoe = () => {
   const closeModal = () => setModalOpen(false);
 
   // Game related
-
-  const [turn, setTurn] = useState('x');
+  const [turn, setTurn] = useState('⚪️');
   const [cells, setCells] = useState(createEmptyArray(9).fill(''));
   const [winner, setWinner] = useState();
+  const [gameCount, setGameCount] = useState(0);
 
   const decideWinner = (squares) => {
     let combos = {
@@ -53,26 +54,24 @@ export const Tictactoe = () => {
     let squares = [...cells];
 
     // eslint-disable-next-line no-unused-expressions
-    turn === 'x' ? ((squares[num] = 'x'), setTurn('o')) : ((squares[num] = 'o'), setTurn('x'));
+    turn === '⚪️' ? ((squares[num] = '⚪️'), setTurn('⚫️')) : ((squares[num] = '⚫️'), setTurn('⚪️'));
 
     decideWinner(squares);
     setCells(squares);
+    setGameCount(gameCount + 1);
   };
 
   const handleRestart = () => {
     setWinner(null);
     setCells(createEmptyArray(9).fill(''));
-  };
-
-  const Cell = ({ num }) => {
-    return <td onClick={() => !winner && handleClick(num)}>{cells[num]}</td>;
+    setGameCount(0);
   };
 
   return (
     <>
       <StyledButton onClickButton={openModal} content={'틱택토 게임'} />
       <Modal open={modalOpen} close={closeModal} header='TicTacToe Game'>
-        <div className='container'>
+        <Flex flexDirection='column' alignItems='center' justifyContent='center'>
           <table>
             <thead>
               <tr>
@@ -81,29 +80,28 @@ export const Tictactoe = () => {
             </thead>
             <tbody>
               <tr>
-                <Cell num={0} />
-                <Cell num={1} />
-                <Cell num={2} />
+                <Cell num={0} winner={winner} cells={cells} handleClick={handleClick} />
+                <Cell num={1} winner={winner} cells={cells} handleClick={handleClick} />
+                <Cell num={2} winner={winner} cells={cells} handleClick={handleClick} />
               </tr>
               <tr>
-                <Cell num={3} />
-                <Cell num={4} />
-                <Cell num={5} />
+                <Cell num={3} winner={winner} cells={cells} handleClick={handleClick} />
+                <Cell num={4} winner={winner} cells={cells} handleClick={handleClick} />
+                <Cell num={5} winner={winner} cells={cells} handleClick={handleClick} />
               </tr>
               <tr>
-                <Cell num={6} />
-                <Cell num={7} />
-                <Cell num={8} />
+                <Cell num={6} winner={winner} cells={cells} handleClick={handleClick} />
+                <Cell num={7} winner={winner} cells={cells} handleClick={handleClick} />
+                <Cell num={8} winner={winner} cells={cells} handleClick={handleClick} />
               </tr>
             </tbody>
           </table>
-          {winner && (
-            <>
-              <p>{winner} is the winner!</p>
-              <button onClick={() => handleRestart()}>Play Again</button>
-            </>
-          )}
-        </div>
+          {winner ? (
+            <TicTacToeGameResult printWinner={() => handleRestart()} content={`${winner} 돌이 승리했습니다.`} />
+          ) : gameCount === 9 ? (
+            <TicTacToeGameResult printWinner={() => handleRestart()} content={`승리자가 없습니다.`} />
+          ) : null}
+        </Flex>
       </Modal>
     </>
   );
