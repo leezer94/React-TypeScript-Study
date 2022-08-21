@@ -4,3 +4,4 @@ export { Form } from './@commons/Form/Form';
 export { Input } from './@commons/Input/Input';
 export { P } from './@commons/P/P';
 export { Modal } from './Modal/Modal';
+export { StyledButton } from './@commons/Button/StyledButton/StyledButton';

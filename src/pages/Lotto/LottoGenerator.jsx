@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Flex, P } from '../../components';
-import LottoButton from '../../components/@commons/Button/LottoButton/LottoButton';
+import { Flex, P, StyledButton } from '../../components';
 
 const LottoGeneratorContainer = (props) => {
   const { onClickGoBackButton, createLottoNumbers } = props;
@@ -37,7 +36,7 @@ const LottoGeneratorContainer = (props) => {
         <Flex>{createLottoElement()}</Flex>
       </div>
       <Flex>
-        <LottoButton content={'처음으로 돌아가기'} onClickButton={onClickGoBackButton} style={{ color: 'brown' }}></LottoButton>
+        <StyledButton content={'처음으로 돌아가기'} onClickButton={onClickGoBackButton} style={{ color: 'brown' }}></StyledButton>
       </Flex>
     </Flex>
   );

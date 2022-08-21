@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledDigitButton } from '../DigitButton/DigitButton.style';
 
-const LottoButton = (props) => {
+export const StyledButton = (props) => {
   const { content, onClickButton, ...rest } = props;
 
   return (
@@ -10,5 +10,3 @@ const LottoButton = (props) => {
     </StyledDigitButton>
   );
 };
-
-export default LottoButton;
