@@ -5,7 +5,8 @@
   "rules": {
     "no-var-keyword": true,
     "quotemark": [true, "single", "jsx-double"],
-    "eofline": true
+    "eofline": true,
+    "no-unused-expressions": "off"
   },
   "rulesDirectory": []
 }

@@ -89,7 +89,7 @@ const CurrentGame = () => {
     <Form ref={wordRelayForm} onSubmit={handleSubmitWord}>
       <P className='current-word' content={currentWord} style={undefined}></P>
       <Input ref={wordInput} type='text' onKeyPressEvent={handleKeyPressEvent} />
-      <Button type={'submit'} content={'입력'} />
+      <Button type={'submit'} content={'입력'} className={''} />
       <P className={loading ? undefined : CLASSNAME.HIDE} content={'사전 검색중...'} style={undefined}></P>
       <P className={loading ? CLASSNAME.HIDE : undefined} content={definition ? definition : ERROR_MESSAGE.EMPTY_INPUT} style={undefined}></P>
       <P style={{ color: COLOR.RED }} ref={errorMessage} content={undefined} className={undefined}></P>

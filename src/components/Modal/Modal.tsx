@@ -1,8 +1,15 @@
 import React from 'react';
-import '../../assets/css/modal.css';
 import { Button } from '../@commons/Button/Button';
+import '../../assets/css/modal.css';
 
-export const Modal = (props) => {
+type props = {
+  open: any;
+  close: any;
+  header: any;
+  children: any;
+};
+
+export const Modal = (props: props) => {
   const { open, close, header } = props;
 
   return (
@@ -11,11 +18,11 @@ export const Modal = (props) => {
         <section>
           <header>
             {header}
-            <Button className='close' onClickEvent={close} content='&times;'></Button>
+            <Button className='close' onClickEvent={close} content='&times;' type={undefined}></Button>
           </header>
           <main>{props.children}</main>
           <footer>
-            <Button className='close' onClickEvent={close} content={'close'} />
+            <Button className='close' onClickEvent={close} content={'close'} type={undefined} />
           </footer>
         </section>
       ) : null}

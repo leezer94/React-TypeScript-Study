@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { useState } from 'react';
 import { Flex, Modal, StyledButton } from '../../components';
 import { TicTacToeGameResult } from './GameResult';
@@ -52,7 +53,6 @@ export const Tictactoe = () => {
 
     let squares = [...cells];
 
-    // eslint-disable-next-line no-unused-expressions
     turn === '⚪️' ? ((squares[num] = '⚪️'), setTurn('⚫️')) : ((squares[num] = '⚫️'), setTurn('⚪️'));
 
     decideWinner(squares);

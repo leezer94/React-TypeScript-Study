@@ -11,7 +11,7 @@ const RpsDisplayContainer = (props) => {
 
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const interval = useRef();
+  const interval = useRef(null);
 
   const printCurrentMove = () => {
     let currentEmoji;

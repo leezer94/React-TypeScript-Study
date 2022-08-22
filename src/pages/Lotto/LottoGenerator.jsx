@@ -4,7 +4,6 @@ import { Flex, P, StyledButton } from '../../components';
 const LottoGeneratorContainer = (props) => {
   const { onClickGoBackButton, createLottoNumbers } = props;
 
-  // when button is clicked 7 lottoNumbers need to be rendered on the page
   const [lottoNumbers, setLottoNumbers] = useState(createLottoNumbers);
   const [winningNumbers, setWinningNumbers] = useState([]);
 

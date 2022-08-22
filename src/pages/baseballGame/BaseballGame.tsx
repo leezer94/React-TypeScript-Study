@@ -128,7 +128,7 @@ export const BaseballGame = () => {
       {currentValue ? null : buttonTemplates()}
       <P content={`랜덤으로 제공되는 ${lengthOfArray}자리 숫자를 예측해 보세요.`} className={''} style={undefined} />
       <Input ref={baseballGameInput} onKeyPressEvent={handleKeyPressEvent} type={''} />
-      <Button type={'submit'} content={'입력'} />
+      <Button type={'submit'} content={'입력'} className={''} />
       {!errorMessage ? null : createErrorMessages(errorMessage)}
       {currentValue ? createCountTemplates() : null}
       {currentValue ? handleResetGame() : null}
