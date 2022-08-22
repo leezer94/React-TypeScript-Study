@@ -11,24 +11,28 @@ const CurrentGame = () => {
   const [state, setState] = useState<setState>({ prevWord: undefined, currentWord: DEFAULT.GIVEN_WORD, definition: undefined, loading: false });
 
   const wordInput = useRef<HTMLInputElement | any>(null);
-  const errorMessage = useRef<HTMLParagraphElement>(null);
+  const errorMessage = useRef<any>(null);
   const wordRelayForm = useRef<HTMLFormElement>(null);
 
   const handleErrorMessage = (word: string, currentWord: string) => {
+    let errorMessage;
+
     if ((word.length > 3 || word.length < 3) && 한글_정규표현식.test(word)) {
-      return ERROR_MESSAGE.NOT_THREE_WORD;
+      errorMessage = ERROR_MESSAGE.NOT_THREE_WORD;
     } else if (!한글_정규표현식.test(word)) {
-      return ERROR_MESSAGE.NOT_KOREAN;
+      errorMessage = ERROR_MESSAGE.NOT_KOREAN;
     } else if (currentWord.at(-1) !== word.at(0)) {
-      return ERROR_MESSAGE.NOT_CORRESPONDING_LETTER;
+      errorMessage = ERROR_MESSAGE.NOT_CORRESPONDING_LETTER;
     } else {
-      return undefined;
+      errorMessage = undefined;
     }
+
+    return errorMessage;
   };
 
-  // const updateErrorMessage = (message) => {
-  //   errorMessage.current.textContent = message;
-  // };
+  const updateErrorMessage = (message: any) => {
+    errorMessage.current.textContent = message;
+  };
 
   const handleSubmitButton = async (word: any) => {
     let { currentWord } = state;
@@ -63,6 +67,8 @@ const CurrentGame = () => {
 
   const onClickSubmitButton = (currentWord: string) => {
     const errorMessageHandler: string | undefined | null = handleErrorMessage(wordInput.current.value, currentWord);
+
+    updateErrorMessage(errorMessageHandler);
 
     if (isValidInputWord(errorMessageHandler)) {
       handleSubmitButton(wordInput.current.value);

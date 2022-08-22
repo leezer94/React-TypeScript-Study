@@ -5,7 +5,7 @@ import { createRandomNumbers } from '../../utils';
 
 export const Lotto = () => {
   const [isClicked, setIsClicked] = useState(false);
-  const createLottoNumbers = useMemo(() => Array.from(createRandomNumbers(7, 1, 45)), []);
+  const createLottoNumbers: any[] = useMemo(() => Array.from(createRandomNumbers(7, 1, 45)), []);
 
   const handleClickLottoButton = () => setIsClicked(!isClicked);
 

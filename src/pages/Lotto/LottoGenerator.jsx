@@ -20,12 +20,12 @@ const LottoGeneratorContainer = (props) => {
       if (i === 6) {
         return (
           <Flex key={i} flexDirection='row'>
-            <P content={'보너스'} style={{ paddingRight: 30, color: 'red' }} />
-            <P content={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />
+            <P content={'보너스'} style={{ paddingRight: 30, color: 'red' }} className={undefined} />
+            <P content={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} className={undefined} />
           </Flex>
         );
       }
-      return <P key={i} content={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} />;
+      return <P key={i} content={el} style={{ marginRight: 20, padding: 20, border: '1px solid black', borderRadius: 50 }} className={undefined} />;
     });
 
   return (

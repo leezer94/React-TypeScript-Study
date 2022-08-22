@@ -8,12 +8,15 @@ const RpsDisplayContainer = (props) => {
 
   const images = ['✌️', '✊🏻', '🖐🏿'];
   const [image, setImage] = useState(0);
+  // number
 
   const [isPlaying, setIsPlaying] = useState(true);
+  // boolean
 
   const interval = useRef(null);
 
   const printCurrentMove = () => {
+    // () => string
     let currentEmoji;
 
     if (currentMove === RPSGAME.SCISSORS) {
@@ -28,6 +31,7 @@ const RpsDisplayContainer = (props) => {
   };
 
   const handleHandImage = useCallback(() => {
+    // () => void
     if (image === images.length - 1) {
       setImage(0);
     } else {
@@ -44,6 +48,10 @@ const RpsDisplayContainer = (props) => {
   }, [handleHandImage]);
 
   const handleGameResult = (currentMove, computerMove) => {
+    // currentMove : string
+    // computerMove : string
+    // () => string
+
     let result = '';
 
     if (computerMove === images[0]) {
@@ -82,6 +90,8 @@ const RpsDisplayContainer = (props) => {
   };
 
   const onClickHandButton = (e) => {
+    // e : <HTMLBUTTONELEMENT/>
+    // () => void
     clearInterval(interval.current);
     setIsPlaying(!isPlaying);
 
@@ -96,6 +106,7 @@ const RpsDisplayContainer = (props) => {
   };
 
   const createRPSButtons = () => {
+    // () => any ??
     const movementArray = [RPSGAME.SCISSORS, RPSGAME.ROCK, RPSGAME.PAPER];
 
     return movementArray.map((el, i) => {

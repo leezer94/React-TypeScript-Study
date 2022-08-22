@@ -10,6 +10,8 @@ type props = {
 
 const ErrorMessage = (props: props) => {
   let { message, loadingStatus, definition } = props;
+
+  console.log(message);
   let template;
 
   if (loadingStatus) {

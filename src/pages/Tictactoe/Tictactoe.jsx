@@ -18,6 +18,7 @@ export const Tictactoe = () => {
   const [gameCount, setGameCount] = useState(0);
 
   const decideWinner = (squares) => {
+    // void
     let combos = {
       across: [
         [0, 1, 2],
@@ -36,7 +37,11 @@ export const Tictactoe = () => {
     };
 
     for (let combo in combos) {
+      // combos : object array with numbers
+      // combo : 2-dimensional array
+
       combos[combo].forEach((pattern) => {
+        // pattern : array with numbers
         if (squares[pattern[0]] === '' || squares[pattern[1]] === '' || squares[pattern[2]] === '') {
           // do nothing
         } else if (squares[pattern[0]] === squares[pattern[1]] && squares[pattern[1]] === squares[pattern[2]]) {
@@ -47,11 +52,14 @@ export const Tictactoe = () => {
   };
 
   const handleClick = (num) => {
+    // void
+    // num : number
     if (cells[num] !== '') {
       return;
     }
 
     let squares = [...cells];
+    // Empty array * 9
 
     turn === '⚪️' ? ((squares[num] = '⚪️'), setTurn('⚫️')) : ((squares[num] = '⚫️'), setTurn('⚪️'));
 
@@ -61,6 +69,7 @@ export const Tictactoe = () => {
   };
 
   const handleRestart = () => {
+    // void
     setWinner(null);
     setCells(createEmptyArray(9).fill(''));
     setGameCount(0);
