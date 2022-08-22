@@ -6,10 +6,8 @@ type props = {
   updateNumber: (i: number) => void;
 };
 
-const DigitButton = (props: props) => {
+export const DigitButton = (props: props) => {
   const { digit, updateNumber } = props;
 
   return <StyledDigitButton onClick={() => updateNumber(digit)}>{digit}</StyledDigitButton>;
 };
-
-export default DigitButton;

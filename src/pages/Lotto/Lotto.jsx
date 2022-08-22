@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { createRandomNumbers } from '../../utils/mathUtils';
 import { Flex, StyledButton } from '../../components';
 import LottoGeneratorContainer from './LottoGenerator';
+import { createRandomNumbers } from '../../utils';
 
 export const Lotto = () => {
   const [isClicked, setIsClicked] = useState(false);

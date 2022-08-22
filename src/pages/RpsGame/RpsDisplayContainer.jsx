@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Form, Button, P } from '../../components';
+import { RPSGAME } from '../../common/constants/constants';
 
 const RpsDisplayContainer = (props) => {
   const { state, handleState, setScore } = props;
@@ -15,12 +16,12 @@ const RpsDisplayContainer = (props) => {
   const printCurrentMove = () => {
     let currentEmoji;
 
-    if (currentMove === '가위') {
-      currentEmoji = '✌️';
-    } else if (currentMove === '바위') {
-      currentEmoji = '✊🏻';
-    } else if (currentMove === '보') {
-      currentEmoji = '🖐🏿';
+    if (currentMove === RPSGAME.SCISSORS) {
+      currentEmoji = RPSGAME.EMOJIS.SCISSORS;
+    } else if (currentMove === RPSGAME.ROCK) {
+      currentEmoji = RPSGAME.EMOJIS.ROCK;
+    } else if (currentMove === RPSGAME.PAPER) {
+      currentEmoji = RPSGAME.EMOJIS.PAPER;
     }
 
     return currentEmoji;
@@ -35,7 +36,7 @@ const RpsDisplayContainer = (props) => {
   }, [image, images.length]);
 
   useEffect(() => {
-    interval.current = setInterval(handleHandImage, 100);
+    interval.current = setInterval(handleHandImage, RPSGAME.DELAY_100);
 
     return () => {
       clearInterval(interval.current);
@@ -46,35 +47,35 @@ const RpsDisplayContainer = (props) => {
     let result = '';
 
     if (computerMove === images[0]) {
-      if (currentMove === '바위') {
-        result = '컴퓨터 승리';
-      } else if (currentMove === '가위') {
-        result = '비겼습니다.';
-      } else if (currentMove === '보') {
-        result = '유저 승리';
+      if (currentMove === RPSGAME.ROCK) {
+        result = RPSGAME.COMPUTER_WIN;
+      } else if (currentMove === RPSGAME.SCISSORS) {
+        result = RPSGAME.TIE;
+      } else if (currentMove === RPSGAME.PAPER) {
+        result = RPSGAME.USER_WIN;
       }
     } else if (computerMove === images[1]) {
-      if (currentMove === '바위') {
-        result = '비겼습니다.';
-      } else if (currentMove === '가위') {
-        result = '컴퓨터 승리';
-      } else if (currentMove === '보') {
-        result = '유저 승리';
+      if (currentMove === RPSGAME.ROCK) {
+        result = RPSGAME.TIE;
+      } else if (currentMove === RPSGAME.SCISSORS) {
+        result = RPSGAME.COMPUTER_WIN;
+      } else if (currentMove === RPSGAME.PAPER) {
+        result = RPSGAME.USER_WIN;
       }
     } else if (computerMove === images[2]) {
-      if (currentMove === '바위') {
-        result = '컴퓨터 승리';
-      } else if (currentMove === '가위') {
-        result = '유저 승리';
-      } else if (currentMove === '보') {
-        result = '비겼습니다';
+      if (currentMove === RPSGAME.ROCK) {
+        result = RPSGAME.COMPUTER_WIN;
+      } else if (currentMove === RPSGAME.SCISSORS) {
+        result = RPSGAME.USER_WIN;
+      } else if (currentMove === RPSGAME.PAPER) {
+        result = RPSGAME.TIE;
       }
     }
 
-    if (result === '컴퓨터 승리') {
-      setScore((score) => score - 10);
-    } else if (result === '유저 승리') {
-      setScore((score) => score + 10);
+    if (result === RPSGAME.COMPUTER_WIN) {
+      setScore((score) => score - RPSGAME.THRESHOLD_POINT);
+    } else if (result === RPSGAME.USER_WIN) {
+      setScore((score) => score + RPSGAME.THRESHOLD_POINT);
     }
 
     return result;
@@ -91,11 +92,11 @@ const RpsDisplayContainer = (props) => {
       gameResult: handleGameResult(e.target.textContent, images[image]),
     });
 
-    interval.current = setInterval(handleHandImage, 500);
+    interval.current = setInterval(handleHandImage, RPSGAME.DELAY_500);
   };
 
   const createRPSButtons = () => {
-    const movementArray = ['가위', '바위', '보'];
+    const movementArray = [RPSGAME.SCISSORS, RPSGAME.ROCK, RPSGAME.PAPER];
 
     return movementArray.map((el, i) => {
       return <Button type='submit' key={i} content={el} onClickEvent={onClickHandButton} />;

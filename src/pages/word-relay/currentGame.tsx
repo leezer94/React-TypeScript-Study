@@ -1,11 +1,9 @@
+import React, { useCallback, useRef, useState } from 'react';
 import { 한글_정규표현식 } from '../../common/regex';
-import { clearInputValue } from '../../utils/utils';
-import { isValidInputWord } from '../../utils/validator';
+import { clearInputValue, isValidInputWord } from '../../utils';
 import { fetch우리말api } from '../../common/api';
 import { CLASSNAME, COLOR, DEFAULT, ERROR_MESSAGE } from '../../common/constants/constants';
-import { useCallback, useRef, useState } from 'react';
 import { Button, Input, Form, P } from '../../components';
-import React from 'react';
 
 type setState = any;
 

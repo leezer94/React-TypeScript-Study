@@ -1,11 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Button, Input, Form, P } from '../../components';
-import { COLOR } from '../../common/constants/constants';
-import { createRandomNumbers } from '../../utils/mathUtils';
-import { clearInputValue, compareTwoArrays, createEmptyArray } from '../../utils/utils';
-import { getErrorMessages } from '../../utils/validator';
+import { Button, Input, Form, P, DigitButton } from '../../components';
 import ResultTemplate from './ResultTemplate';
-import DigitButton from '../../components/@commons/Button/DigitButton/DigitButton';
+import { COLOR } from '../../common/constants/constants';
+import { getErrorMessages, createRandomNumbers, clearInputValue, compareTwoArrays, createEmptyArray } from '../../utils';
 
 export const BaseballGame = () => {
   const [lengthOfArray, setLengthOfArray] = useState<any>(4);

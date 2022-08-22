@@ -1,6 +1,7 @@
 import React from 'react';
 import { CLASSNAME, ERROR_MESSAGE } from '../../common/constants/constants';
 import { P } from '../../components';
+
 type props = {
   message: string | boolean;
   loadingStatus: boolean;

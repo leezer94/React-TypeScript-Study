@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Flex, Modal } from '../../components';
-import { StyledButton } from '../../components';
-import { createEmptyArray } from '../../utils/utils';
-import { Cell } from './Cell';
+import { Flex, Modal, StyledButton } from '../../components';
 import { TicTacToeGameResult } from './GameResult';
+import { Cell } from './Cell';
+import { createEmptyArray } from '../../utils';
 
 export const Tictactoe = () => {
   //  Modal related

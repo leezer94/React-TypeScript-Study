@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { generateRandomNumber } from '../../utils/mathUtils';
 import DigitButtonContainer from './DigitButtonContainer';
 import MultiplicationMainContainer from './Game-main-container';
+import { generateRandomNumber } from '../../utils';
+
 //TODO 아토믹 패턴 ?? 컴포넌트화 기준 나누기?? 타입스크립트 적용?? styledComponent 적용 ?
 
 interface stateProps {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import { Tictactoe, Lotto, RpsGame, WordRelay, MultiplicationTable, BaseballGame } from './pages';
-import Navbar from './components/Navbar/Navbar';
+import { Navbar } from './components/';
 import './App.css';
 
 const GlobalStyle = createGlobalStyle`
