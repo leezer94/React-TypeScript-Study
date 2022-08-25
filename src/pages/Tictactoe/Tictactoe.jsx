@@ -18,7 +18,9 @@ export const Tictactoe = () => {
   const [gameCount, setGameCount] = useState(0);
 
   const decideWinner = (squares) => {
-    // void
+    // squares : array with 9 empties
+    // (any) => void
+
     let combos = {
       across: [
         [0, 1, 2],
@@ -52,7 +54,7 @@ export const Tictactoe = () => {
   };
 
   const handleClick = (num) => {
-    // void
+    // (num) => void
     // num : number
     if (cells[num] !== '') {
       return;

@@ -4,7 +4,7 @@ type props = {
   num: number;
   winner: string;
   cells: number[];
-  handleClick: (num: number) => void;
+  handleClick: (num: number) => boolean | void;
 };
 
 export const Cell = ({ num, winner, cells, handleClick }: props) => {
